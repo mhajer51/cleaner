@@ -12,51 +12,114 @@ export default function AuthenticatedLayout({ header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
+        <div className="min-h-screen bg-slate-950 text-slate-100">
+            <nav className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                    <div className="flex h-16 items-center justify-between">
+                        <div className="flex items-center gap-8">
+                            <div className="flex shrink-0 items-center gap-3">
+                                <Link
+                                    href="/"
+                                    className="flex items-center gap-3"
+                                >
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 shadow-lg shadow-indigo-500/30">
+                                        <ApplicationLogo className="h-6 w-6 fill-current text-white" />
+                                    </div>
+                                    <div className="hidden text-sm font-semibold uppercase tracking-[0.2em] text-white/80 sm:block">
+                                        Aurora
+                                    </div>
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div className="hidden items-center gap-6 lg:flex">
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    Dashboard
+                                    Overview
+                                </NavLink>
+                                <NavLink href="#" active={false}>
+                                    Analytics
+                                </NavLink>
+                                <NavLink href="#" active={false}>
+                                    Team
+                                </NavLink>
+                                <NavLink href="#" active={false}>
+                                    Projects
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div className="relative ms-3">
+                        <div className="hidden items-center gap-4 lg:flex">
+                            <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+                                <svg
+                                    className="h-4 w-4 text-white/60"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="1.5"
+                                        d="m21 21-4.3-4.3m0 0A7.5 7.5 0 1 0 6 6a7.5 7.5 0 0 0 10.7 10.7Z"
+                                    />
+                                </svg>
+                                <span>Search insights...</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white"
+                            >
+                                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-400"></span>
+                                <svg
+                                    className="h-5 w-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="1.5"
+                                        d="M14 17h-4m9-6a7 7 0 1 0-14 0v3.5c0 .6-.2 1.2-.6 1.7L3 18h18l-1.4-1.8c-.4-.5-.6-1.1-.6-1.7V11Z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <div className="relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                        <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-1 text-sm text-white/80 transition hover:text-white">
+                                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-slate-800 to-slate-700 text-xs font-semibold uppercase text-white">
+                                                {user.name
+                                                    .split(' ')
+                                                    .map((part) => part[0])
+                                                    .join('')}
+                                            </span>
+                                            <span className="hidden px-3 text-left sm:block">
+                                                <span className="block text-xs text-white/50">
+                                                    Welcome back
+                                                </span>
+                                                <span className="block text-sm font-semibold">
+                                                    {user.name}
+                                                </span>
+                                            </span>
+                                            <svg
+                                                className="me-1 ms-2 h-4 w-4"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
                                             >
-                                                {user.name}
-
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
                                         </span>
                                     </Dropdown.Trigger>
 
@@ -78,14 +141,14 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        <div className="-me-2 flex items-center lg:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
                                         (previousState) => !previousState,
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 p-2 text-white/70 transition hover:text-white"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -124,24 +187,33 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div
                     className={
                         (showingNavigationDropdown ? 'block' : 'hidden') +
-                        ' sm:hidden'
+                        ' border-t border-white/10 bg-slate-900/80 backdrop-blur sm:hidden'
                     }
                 >
-                    <div className="space-y-1 pb-3 pt-2">
+                    <div className="space-y-1 px-4 pb-3 pt-4">
                         <ResponsiveNavLink
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
-                            Dashboard
+                            Overview
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href="#">
+                            Analytics
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href="#">
+                            Team
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href="#">
+                            Projects
                         </ResponsiveNavLink>
                     </div>
 
-                    <div className="border-t border-gray-200 pb-1 pt-4">
+                    <div className="border-t border-white/10 pb-4 pt-4">
                         <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
+                            <div className="text-base font-medium text-white">
                                 {user.name}
                             </div>
-                            <div className="text-sm font-medium text-gray-500">
+                            <div className="text-sm font-medium text-white/60">
                                 {user.email}
                             </div>
                         </div>
@@ -163,14 +235,14 @@ export default function AuthenticatedLayout({ header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <header className="bg-slate-950">
+                    <div className="mx-auto max-w-7xl px-4 pb-4 pt-8 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main>{children}</main>
+            <main className="pb-16">{children}</main>
         </div>
     );
 }
