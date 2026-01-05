@@ -42,40 +42,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                     >
                                         Dashboard
                                     </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        New Requests
-                                    </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        Daily Schedule
-                                    </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        Clients
-                                    </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        Field Teams
-                                    </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        Reports
-                                    </NavLink>
-                                </div>
-                            </div>
-
-                            <div>
-                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                                    Administration
-                                </p>
-                                <div className="mt-3 space-y-1">
-                                    <NavLink href="#" active={false}>
-                                        Billing & Payments
-                                    </NavLink>
                                     <NavLink
                                         href={route('admin.slider.index')}
                                         active={route().current('admin.slider.*')}
                                     >
                                         Slider Manager
-                                    </NavLink>
-                                    <NavLink href="#" active={false}>
-                                        Inventory
                                     </NavLink>
                                     <Dropdown>
                                         <Dropdown.Trigger>
@@ -134,35 +105,6 @@ export default function AuthenticatedLayout({ header, children }) {
                                                     </span>
                                                     <span className="block text-xs text-slate-500">
                                                         Edit your personal details
-                                                    </span>
-                                                </span>
-                                            </Dropdown.Link>
-                                            <Dropdown.Link
-                                                href={route('profile.edit')}
-                                                className="flex items-center gap-3"
-                                            >
-                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-fuchsia-50 text-fuchsia-600">
-                                                    <svg
-                                                        className="h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="1.5"
-                                                            d="M16.5 10.5V7a4.5 4.5 0 1 0-9 0v3.5m-.75 0h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H6.75a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5Z"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                <span>
-                                                    <span className="block text-sm font-semibold text-slate-800">
-                                                        Reset Password
-                                                    </span>
-                                                    <span className="block text-xs text-slate-500">
-                                                        Update your credentials
                                                     </span>
                                                 </span>
                                             </Dropdown.Link>
@@ -230,17 +172,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
-                        <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                            <p className="text-sm font-semibold text-slate-800">
-                                Today at a glance
-                            </p>
-                            <p className="mt-2 text-sm text-slate-500">
-                                18 tasks scheduled, 5 active teams, 96% on-time.
-                            </p>
-                            <button className="mt-4 w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500">
-                                Open Operations Room
-                            </button>
-                        </div>
+
 
                         <div className="mt-auto pt-6">
                             <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -354,50 +286,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden flex-1 items-center justify-between gap-6 lg:flex">
-                                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-500">
-                                    <svg
-                                        className="h-4 w-4 text-slate-400"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="1.5"
-                                            d="m21 21-4.3-4.3m0 0A7.5 7.5 0 1 0 6 6a7.5 7.5 0 0 0 10.7 10.7Z"
-                                        />
-                                    </svg>
-                                    <span>Search for a client or task...</span>
-                                </div>
                                 <div className="flex items-center gap-3">
-                                    <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:text-slate-900">
-                                        Create Quote
-                                    </button>
-                                    <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500">
-                                        Add New Task
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:text-slate-700"
-                                    >
-                                        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-500"></span>
-                                        <svg
-                                            className="h-5 w-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="1.5"
-                                                d="M14 17h-4m9-6a7 7 0 1 0-14 0v3.5c0 .6-.2 1.2-.6 1.7L3 18h18l-1.4-1.8c-.4-.5-.6-1.1-.6-1.7V11Z"
-                                            />
-                                        </svg>
-                                    </button>
                                     <Dropdown>
                                         <Dropdown.Trigger>
                                             <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 transition hover:text-slate-800">
