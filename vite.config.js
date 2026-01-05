@@ -10,4 +10,13 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        hmr: {
+            host: 'cleaner.localhost', // Match the domain opened in the browser
+            protocol: 'ws',
+            port: 5173,
+        },
+    },
 });
