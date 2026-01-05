@@ -14,27 +14,33 @@ export default function AuthenticatedLayout({ header, children }) {
     return (
         <div className="min-h-screen bg-slate-950 text-slate-100" dir="ltr">
             <div className="lg:flex">
-                <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:border-l lg:border-white/10 lg:bg-slate-950">
-                    <div className="flex flex-1 flex-col px-6 pb-8 pt-8">
-                        <Link href="/" className="flex items-center gap-3">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 shadow-lg shadow-indigo-500/30">
+                <aside className="hidden lg:flex lg:w-80 lg:flex-col lg:border-r lg:border-white/10 lg:bg-slate-950/90 lg:shadow-[0_20px_60px_rgba(15,23,42,0.55)] lg:backdrop-blur-2xl">
+                    <div className="flex flex-1 flex-col px-7 pb-8 pt-8">
+                        <Link href="/" className="flex items-center gap-4">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 shadow-lg shadow-indigo-500/30 ring-1 ring-white/20">
                                 <ApplicationLogo className="h-7 w-7 fill-current text-white" />
                             </div>
                             <div>
-                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/50">
                                     Control Center
                                 </p>
                                 <p className="text-lg font-semibold text-white">
                                     Lamaa Cleaning
                                 </p>
+                                <p className="text-xs text-white/50">
+                                    Premium operations suite
+                                </p>
                             </div>
                         </Link>
 
-                        <div className="mt-10 space-y-2">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-                                Main Sections
-                            </p>
-                            <div className="space-y-1">
+                        <div className="mt-10 space-y-4">
+                            <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+                                    Main Sections
+                                </p>
+                                <span className="h-px w-16 bg-white/10"></span>
+                            </div>
+                            <div className="space-y-2">
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
@@ -59,11 +65,14 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
-                        <div className="mt-10 space-y-2">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-                                Administration
-                            </p>
-                            <div className="space-y-1">
+                        <div className="mt-10 space-y-4">
+                            <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+                                    Administration
+                                </p>
+                                <span className="h-px w-16 bg-white/10"></span>
+                            </div>
+                            <div className="space-y-2">
                                 <NavLink href="#" active={false}>
                                     Billing & Payments
                                 </NavLink>
@@ -76,20 +85,20 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
-                        <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-fuchsia-500/10 p-5">
+                        <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-fuchsia-500/10 p-5 shadow-[0_12px_30px_rgba(79,70,229,0.18)]">
                             <p className="text-sm font-semibold text-white">
                                 Today at a glance
                             </p>
                             <p className="mt-2 text-sm text-white/70">
                                 18 tasks scheduled, 5 active teams, 96% on-time.
                             </p>
-                            <button className="mt-4 w-full rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-white/30">
+                            <button className="mt-4 w-full rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-white/30 transition hover:-translate-y-0.5 hover:shadow-white/40">
                                 Open Operations Room
                             </button>
                         </div>
 
                         <div className="mt-auto pt-8">
-                            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3">
+                            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 shadow-[0_10px_25px_rgba(15,23,42,0.4)]">
                                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-slate-800 to-slate-700 text-xs font-semibold uppercase text-white">
                                     {user.name
                                         .split(' ')
