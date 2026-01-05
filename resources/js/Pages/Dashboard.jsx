@@ -1,30 +1,138 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
+const overviewStats = [
+    {
+        label: 'Monthly revenue',
+        value: 'SAR 420,500',
+        delta: '+12.8%',
+        caption: 'Compared to last month',
+        trend: 'from-emerald-400 to-cyan-300'
+    },
+    {
+        label: 'Today’s requests',
+        value: '36 orders',
+        delta: '+8.3%',
+        caption: 'Strong conversion rate',
+        trend: 'from-purple-400 to-fuchsia-400'
+    },
+    {
+        label: 'Active teams',
+        value: '5 teams',
+        delta: '+1 team',
+        caption: '96% readiness',
+        trend: 'from-indigo-400 to-sky-400'
+    },
+    {
+        label: 'Service rating',
+        value: '4.8 / 5',
+        delta: 'High satisfaction',
+        caption: 'Weekly average',
+        trend: 'from-amber-300 to-orange-400'
+    }
+];
+
+const serviceMix = [
+    { label: 'Residential cleaning', value: '72%' },
+    { label: 'Office cleaning', value: '48%' },
+    { label: 'Full sanitization', value: '35%' }
+];
+
+const teamMetrics = [
+    { label: 'On-time arrivals', value: '96%', trend: '+2%' },
+    { label: 'Task completion', value: '93%', trend: '+1.4%' },
+    { label: 'Closed tickets', value: '18 cases', trend: '-3' }
+];
+
+const dailySchedule = [
+    {
+        title: 'Al-Adan Villa - Deep clean',
+        owner: 'Elite team',
+        status: '08:30 AM'
+    },
+    {
+        title: 'Future Company - Offices',
+        owner: 'Shorouk team',
+        status: '11:00 AM'
+    },
+    {
+        title: 'Rinad Complex - Sanitization',
+        owner: 'Shafaq team',
+        status: '02:00 PM'
+    }
+];
+
+const teamPulse = [
+    {
+        name: 'Sarah Abdullah',
+        role: 'Shafaq team lead',
+        status: 'Ready'
+    },
+    {
+        name: 'Abdullah Salem',
+        role: 'Quality supervisor',
+        status: 'In the field'
+    },
+    {
+        name: 'Najla Yousef',
+        role: 'Customer success lead',
+        status: 'Following up'
+    }
+];
+
+const customerFeedback = [
+    '"Excellent punctuality and spotless work."',
+    '"The team was professional and sanitization was clear."',
+    '"Outstanding response time for urgent requests."'
+];
+
+const activityTimeline = [
+    {
+        title: 'Sanitization request completed',
+        time: '18 minutes ago',
+        detail: 'Shorouk team finished the job successfully.'
+    },
+    {
+        title: 'New client onboarded',
+        time: '1 hour ago',
+        detail: 'Shining Cloud Co. signed a monthly contract.'
+    },
+    {
+        title: 'Quality plan updated',
+        time: '3 hours ago',
+        detail: 'Customer satisfaction survey sent.'
+    }
+];
+
 export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                    <div>
-                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-200/70">
-                            لمحة تشغيلية
-                        </p>
-                        <h2 className="mt-2 text-3xl font-semibold text-white lg:text-4xl">
-                            لوحة إدارة شركة لمعة النظافة
-                        </h2>
-                        <p className="mt-2 max-w-2xl text-sm text-slate-300">
-                            تابع الحجوزات المباشرة، أداء الفرق الميدانية، رضا
-                            العملاء، ومستوى الخدمة من مكان واحد.
-                        </p>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3">
-                        <button className="rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white">
-                            تنزيل تقرير اليوم
-                        </button>
-                        <button className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110">
-                            جدولة مهمة عاجلة
-                        </button>
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8">
+                    <div className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-indigo-500/20 blur-3xl" />
+                    <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-emerald-400/20 blur-3xl" />
+                    <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-indigo-200/70">
+                                Real-time operations
+                            </p>
+                            <h2 className="mt-3 text-3xl font-semibold text-white lg:text-4xl">
+                                Lamaa Cleaning Operations Dashboard
+                            </h2>
+                            <p className="mt-3 max-w-2xl text-sm text-slate-300">
+                                Track live bookings, field team performance,
+                                customer satisfaction, and service quality from
+                                one unified workspace.
+                            </p>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <button className="rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white">
+                                Download daily report
+                            </button>
+                            <button className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110">
+                                Schedule urgent task
+                            </button>
+                        </div>
                     </div>
                 </div>
             }
@@ -33,74 +141,54 @@ export default function Dashboard() {
 
             <div className="pb-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid gap-6 lg:grid-cols-[2fr,1fr]">
-                        <section className="space-y-6">
-                            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                                {[
-                                    {
-                                        label: 'إيرادات الشهر',
-                                        value: '420,500 ر.س',
-                                        delta: '+12.8%'
-                                    },
-                                    {
-                                        label: 'طلبات اليوم',
-                                        value: '36 طلب',
-                                        delta: '+8.3%'
-                                    },
-                                    {
-                                        label: 'فرق نشطة الآن',
-                                        value: '5 فرق',
-                                        delta: '+1 فريق'
-                                    },
-                                    {
-                                        label: 'تقييم الخدمة',
-                                        value: '4.8 / 5',
-                                        delta: 'رضا مرتفع'
-                                    }
-                                ].map((stat) => (
+                    <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                        {overviewStats.map((stat) => (
+                            <div
+                                key={stat.label}
+                                className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/20 backdrop-blur"
+                            >
+                                <div className="flex items-start justify-between gap-4">
+                                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                                        {stat.label}
+                                    </p>
+                                    <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">
+                                        {stat.delta}
+                                    </span>
+                                </div>
+                                <p className="mt-4 text-2xl font-semibold text-white">
+                                    {stat.value}
+                                </p>
+                                <p className="mt-1 text-xs text-white/50">
+                                    {stat.caption}
+                                </p>
+                                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                                     <div
-                                        key={stat.label}
-                                        className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/20 backdrop-blur"
-                                    >
-                                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                            {stat.label}
-                                        </p>
-                                        <div className="mt-4 flex items-end justify-between">
-                                            <p className="text-2xl font-semibold text-white">
-                                                {stat.value}
-                                            </p>
-                                            <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">
-                                                {stat.delta}
-                                            </span>
-                                        </div>
-                                        <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                                            <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-indigo-400 to-emerald-400"></div>
-                                        </div>
-                                    </div>
-                                ))}
+                                        className={`h-full w-2/3 rounded-full bg-gradient-to-r ${stat.trend}`}
+                                    ></div>
+                                </div>
                             </div>
+                        ))}
+                    </section>
 
+                    <div className="mt-8 grid gap-6 lg:grid-cols-[2fr,1fr]">
+                        <section className="space-y-6">
                             <div className="grid gap-6 lg:grid-cols-2">
                                 <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                                توزيع الخدمات
+                                            Service mix
                                             </p>
                                             <h3 className="mt-2 text-lg font-semibold text-white">
-                                                أكثر الطلبات هذا الأسبوع
+                                                Top requests this week
                                             </h3>
                                         </div>
                                         <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-                                            آخر 7 أيام
+                                            Last 7 days
                                         </span>
                                     </div>
                                     <div className="mt-6 space-y-4">
-                                        {[
-                                            { label: 'تنظيف منازل', value: '72%' },
-                                            { label: 'تنظيف مكاتب', value: '48%' },
-                                            { label: 'تعقيم شامل', value: '35%' }
-                                        ].map((item) => (
+                                        {serviceMix.map((item) => (
                                             <div
                                                 key={item.label}
                                                 className="space-y-2"
@@ -122,11 +210,12 @@ export default function Dashboard() {
                                     </div>
                                     <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/40 p-4">
                                         <p className="text-sm font-medium text-white/80">
-                                            تنبيه عملياتي
+                                            Operations alert
                                         </p>
                                         <p className="mt-2 text-sm text-white/60">
-                                            زيادة طلبات التعقيم بنسبة 18%. يُفضل
-                                            إضافة فريق دعم إضافي لوسط المدينة.
+                                            Sanitization requests are up 18%.
+                                            Add an extra support team for the
+                                            downtown area.
                                         </p>
                                     </div>
                                 </div>
@@ -135,34 +224,18 @@ export default function Dashboard() {
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                                أداء الفرق
+                                                Team performance
                                             </p>
                                             <h3 className="mt-2 text-lg font-semibold text-white">
-                                                مؤشرات الالتزام والجودة
+                                                Reliability & quality
                                             </h3>
                                         </div>
                                         <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-                                            اليوم
+                                            Today
                                         </span>
                                     </div>
                                     <div className="mt-6 grid gap-4">
-                                        {[
-                                            {
-                                                label: 'الالتزام بالمواعيد',
-                                                value: '96%',
-                                                trend: '+2%'
-                                            },
-                                            {
-                                                label: 'إكمال المهام',
-                                                value: '93%',
-                                                trend: '+1.4%'
-                                            },
-                                            {
-                                                label: 'شكاوى مغلقة',
-                                                value: '18 بلاغ',
-                                                trend: '-3'
-                                            }
-                                        ].map((item) => (
+                                        {teamMetrics.map((item) => (
                                             <div
                                                 key={item.label}
                                                 className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3"
@@ -183,7 +256,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className="mt-6 rounded-2xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-fuchsia-500/20 p-4">
                                         <p className="text-sm text-white/70">
-                                            مستوى الجودة الكلي
+                                            Overall quality score
                                         </p>
                                         <p className="mt-1 text-2xl font-semibold text-white">
                                             91%
@@ -199,34 +272,18 @@ export default function Dashboard() {
                                 <div className="flex flex-wrap items-center justify-between gap-4">
                                     <div>
                                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                            جدول اليوم
+                                            Today’s schedule
                                         </p>
                                         <h3 className="mt-2 text-lg font-semibold text-white">
-                                            المهام القادمة للفرق
+                                            Upcoming team assignments
                                         </h3>
                                     </div>
                                     <button className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">
-                                        عرض كل الجداول
+                                        View all schedules
                                     </button>
                                 </div>
                                 <div className="mt-6 space-y-4">
-                                    {[
-                                        {
-                                            title: 'فيلا العدان - تنظيف شامل',
-                                            owner: 'فريق النخبة',
-                                            status: '08:30 ص'
-                                        },
-                                        {
-                                            title: 'شركة المستقبل - مكاتب',
-                                            owner: 'فريق الشروق',
-                                            status: '11:00 ص'
-                                        },
-                                        {
-                                            title: 'مجمع ريناد - تعقيم',
-                                            owner: 'فريق الشفق',
-                                            status: '02:00 م'
-                                        }
-                                    ].map((project) => (
+                                    {dailySchedule.map((project) => (
                                         <div
                                             key={project.title}
                                             className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3"
@@ -251,29 +308,13 @@ export default function Dashboard() {
                         <aside className="space-y-6">
                             <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20">
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                    نبض الفريق
+                                    Team pulse
                                 </p>
                                 <h3 className="mt-2 text-lg font-semibold text-white">
-                                    الجاهزية والتوزيع
+                                    Readiness & allocation
                                 </h3>
                                 <div className="mt-6 space-y-4">
-                                    {[
-                                        {
-                                            name: 'سارة عبدالله',
-                                            role: 'قائدة فريق الشفق',
-                                            status: 'جاهزة'
-                                        },
-                                        {
-                                            name: 'عبدالله سالم',
-                                            role: 'مشرف الجودة',
-                                            status: 'في الميدان'
-                                        },
-                                        {
-                                            name: 'نجلاء يوسف',
-                                            role: 'مديرة العملاء',
-                                            status: 'متابعة مكالمات'
-                                        }
-                                    ].map((person) => (
+                                    {teamPulse.map((person) => (
                                         <div
                                             key={person.name}
                                             className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3"
@@ -293,46 +334,69 @@ export default function Dashboard() {
                                     ))}
                                 </div>
                                 <button className="mt-6 w-full rounded-2xl border border-white/15 bg-white/5 py-2 text-sm font-semibold text-white/80">
-                                    إرسال رسالة للفرق
+                                    Message the teams
                                 </button>
                             </div>
 
                             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-fuchsia-500/20 p-6 shadow-lg shadow-black/20">
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                                    الهدف الشهري
+                                    Monthly objective
                                 </p>
                                 <h3 className="mt-3 text-xl font-semibold text-white">
-                                    رفع متوسط تقييم العملاء
+                                    Raise customer ratings
                                 </h3>
                                 <p className="mt-2 text-sm text-white/70">
-                                    ركّز على متابعة ما بعد الخدمة لضمان تقييم
-                                    أعلى من 4.9.
+                                    Focus on post-service follow-ups to exceed a
+                                    4.9 rating.
                                 </p>
                                 <div className="mt-6 flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/80">
-                                    <span>متبقي 12 يوم</span>
+                                    <span>12 days remaining</span>
                                     <span className="font-semibold">
-                                        74% محقق
+                                        74% achieved
                                     </span>
                                 </div>
                                 <button className="mt-6 w-full rounded-2xl bg-white text-sm font-semibold text-slate-950 shadow-lg shadow-white/30">
-                                    مراجعة الخطة
+                                    Review plan
                                 </button>
                             </div>
 
                             <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20">
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                    ملاحظات العملاء
+                                    Latest activity
+                                </p>
+                                <div className="mt-4 space-y-4">
+                                    {activityTimeline.map((item) => (
+                                        <div
+                                            key={item.title}
+                                            className="rounded-2xl border border-white/10 bg-slate-950/40 p-4"
+                                        >
+                                            <p className="text-sm font-semibold text-white">
+                                                {item.title}
+                                            </p>
+                                            <p className="mt-1 text-xs text-white/50">
+                                                {item.time}
+                                            </p>
+                                            <p className="mt-2 text-sm text-white/70">
+                                                {item.detail}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20">
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                                    Customer feedback
                                 </p>
                                 <div className="mt-4 space-y-3 text-sm text-white/70">
-                                    <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3">
-                                        "التزام رائع بالمواعيد، ونظافة ممتازة"
-                                    </div>
-                                    <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3">
-                                        "الفريق كان محترفًا وأدوات التعقيم واضحة"
-                                    </div>
-                                    <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3">
-                                        "سرعة استجابة ممتازة لخدمة الطوارئ"
-                                    </div>
+                                    {customerFeedback.map((feedback) => (
+                                        <div
+                                            key={feedback}
+                                            className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3"
+                                        >
+                                            {feedback}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </aside>

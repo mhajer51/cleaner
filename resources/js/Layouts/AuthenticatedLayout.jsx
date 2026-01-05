@@ -12,7 +12,7 @@ export default function AuthenticatedLayout({ header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100" dir="rtl">
+        <div className="min-h-screen bg-slate-950 text-slate-100" dir="ltr">
             <div className="lg:flex">
                 <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:border-l lg:border-white/10 lg:bg-slate-950">
                     <div className="flex flex-1 flex-col px-6 pb-8 pt-8">
@@ -22,69 +22,69 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                                    لوحة التحكم
+                                    Control Center
                                 </p>
                                 <p className="text-lg font-semibold text-white">
-                                    شركة لمعة النظافة
+                                    Lamaa Cleaning
                                 </p>
                             </div>
                         </Link>
 
                         <div className="mt-10 space-y-2">
                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-                                الأقسام الرئيسية
+                                Main Sections
                             </p>
                             <div className="space-y-1">
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    لوحة التحكم
+                                    Dashboard
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    الطلبات الجديدة
+                                    New Requests
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    الجدولة اليومية
+                                    Daily Schedule
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    العملاء
+                                    Clients
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    الفرق الميدانية
+                                    Field Teams
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    التقارير
+                                    Reports
                                 </NavLink>
                             </div>
                         </div>
 
                         <div className="mt-10 space-y-2">
                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-                                الإدارة
+                                Administration
                             </p>
                             <div className="space-y-1">
                                 <NavLink href="#" active={false}>
-                                    الفواتير والمدفوعات
+                                    Billing & Payments
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    المخزون
+                                    Inventory
                                 </NavLink>
                                 <NavLink href="#" active={false}>
-                                    الإعدادات
+                                    Settings
                                 </NavLink>
                             </div>
                         </div>
 
                         <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-fuchsia-500/10 p-5">
                             <p className="text-sm font-semibold text-white">
-                                حالة التشغيل اليوم
+                                Today at a glance
                             </p>
                             <p className="mt-2 text-sm text-white/70">
-                                18 مهمة مجدولة، 5 فرق نشطة، نسبة التزام 96%.
+                                18 tasks scheduled, 5 active teams, 96% on-time.
                             </p>
                             <button className="mt-4 w-full rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-white/30">
-                                فتح غرفة المتابعة
+                                Open Operations Room
                             </button>
                         </div>
 
@@ -101,7 +101,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         {user.name}
                                     </p>
                                     <p className="text-xs text-white/60">
-                                        مدير العمليات
+                                        Operations Manager
                                     </p>
                                 </div>
                                 <Dropdown>
@@ -128,14 +128,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            الملف الشخصي
+                                            Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            تسجيل الخروج
+                                            Sign out
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -192,10 +192,10 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </div>
                                     <div>
                                         <p className="text-xs font-semibold text-white/60">
-                                            شركة لمعة النظافة
+                                            Lamaa Cleaning
                                         </p>
                                         <p className="text-sm font-semibold text-white">
-                                            لوحة الإدارة
+                                            Operations Panel
                                         </p>
                                     </div>
                                 </Link>
@@ -217,14 +217,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                             d="m21 21-4.3-4.3m0 0A7.5 7.5 0 1 0 6 6a7.5 7.5 0 0 0 10.7 10.7Z"
                                         />
                                     </svg>
-                                    <span>ابحث عن عميل أو مهمة...</span>
+                                    <span>Search for a client or task...</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <button className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white">
-                                        إنشاء عرض سعر
+                                        Create Quote
                                     </button>
                                     <button className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110">
-                                        إضافة مهمة جديدة
+                                        Add New Task
                                     </button>
                                     <button
                                         type="button"
@@ -266,14 +266,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            الملف الشخصي
+                                            Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            تسجيل الخروج
+                                            Sign out
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -291,25 +291,25 @@ export default function AuthenticatedLayout({ header, children }) {
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    لوحة التحكم
+                                    Dashboard
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    الطلبات الجديدة
+                                    New Requests
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    الجدولة اليومية
+                                    Daily Schedule
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    العملاء
+                                    Clients
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    الفرق الميدانية
+                                    Field Teams
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    التقارير
+                                    Reports
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink href="#">
-                                    الإعدادات
+                                    Settings
                                 </ResponsiveNavLink>
                             </div>
 
@@ -325,14 +325,14 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                 <div className="mt-3 space-y-1">
                                     <ResponsiveNavLink href={route('profile.edit')}>
-                                        الملف الشخصي
+                                        Profile
                                     </ResponsiveNavLink>
                                     <ResponsiveNavLink
                                         method="post"
                                         href={route('logout')}
                                         as="button"
                                     >
-                                        تسجيل الخروج
+                                        Sign out
                                     </ResponsiveNavLink>
                                 </div>
                             </div>
