@@ -76,6 +76,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <NavLink href="#" active={false}>
                                     Billing & Payments
                                 </NavLink>
+                                <NavLink
+                                    href={route('admin.slider.index')}
+                                    active={route().current('admin.slider.*')}
+                                >
+                                    Slider Manager
+                                </NavLink>
                                 <NavLink href="#" active={false}>
                                     Inventory
                                 </NavLink>
