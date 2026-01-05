@@ -12,117 +12,80 @@ export default function AuthenticatedLayout({ header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100" dir="ltr">
+        <div className="min-h-screen bg-slate-100 text-slate-900" dir="ltr">
             <div className="lg:flex">
-                <aside className="hidden lg:flex lg:w-80 lg:flex-col lg:border-r lg:border-white/10 lg:bg-slate-950/90 lg:shadow-[0_20px_60px_rgba(15,23,42,0.55)] lg:backdrop-blur-2xl">
-                    <div className="flex flex-1 flex-col px-7 pb-8 pt-8">
-                        <Link href="/" className="flex items-center gap-4">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 shadow-lg shadow-indigo-500/30 ring-1 ring-white/20">
-                                <ApplicationLogo className="h-7 w-7 fill-current text-white" />
+                <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white lg:shadow-sm">
+                    <div className="flex flex-1 flex-col px-6 pb-6 pt-6">
+                        <Link href="/" className="flex items-center gap-3">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 shadow-sm">
+                                <ApplicationLogo className="h-6 w-6 fill-current text-white" />
                             </div>
                             <div>
-                                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/50">
-                                    Control Center
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                    Admin Panel
                                 </p>
-                                <p className="text-lg font-semibold text-white">
+                                <p className="text-lg font-semibold text-slate-900">
                                     Lamaa Cleaning
-                                </p>
-                                <p className="text-xs text-white/50">
-                                    Premium operations suite
                                 </p>
                             </div>
                         </Link>
 
-                        <div className="mt-10 space-y-4">
-                            <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
-                                    Main Sections
+                        <div className="mt-8 space-y-5">
+                            <div>
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                    Main
                                 </p>
-                                <span className="h-px w-16 bg-white/10"></span>
+                                <div className="mt-3 space-y-1">
+                                    <NavLink
+                                        href={route('dashboard')}
+                                        active={route().current('dashboard')}
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        New Requests
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        Daily Schedule
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        Clients
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        Field Teams
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        Reports
+                                    </NavLink>
+                                </div>
                             </div>
-                            <div className="space-y-2">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    New Requests
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    Daily Schedule
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    Clients
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    Field Teams
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    Reports
-                                </NavLink>
-                            </div>
-                        </div>
 
-                        <div className="mt-10 space-y-4">
-                            <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+                            <div>
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                                     Administration
                                 </p>
-                                <span className="h-px w-16 bg-white/10"></span>
-                            </div>
-                            <div className="space-y-2">
-                                <NavLink href="#" active={false}>
-                                    Billing & Payments
-                                </NavLink>
-                                <NavLink
-                                    href={route('admin.slider.index')}
-                                    active={route().current('admin.slider.*')}
-                                >
-                                    Slider Manager
-                                </NavLink>
-                                <NavLink href="#" active={false}>
-                                    Inventory
-                                </NavLink>
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <button
-                                            type="button"
-                                            className="group relative flex w-full items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium text-white/60 transition duration-150 ease-in-out hover:bg-white/5 hover:text-white focus:outline-none"
-                                        >
-                                            <span>Settings</span>
-                                            <svg
-                                                className="h-4 w-4 text-white/60 transition group-hover:text-white"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="1.5"
-                                                    d="m7 10 5 5 5-5"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </Dropdown.Trigger>
-                                    <Dropdown.Content
-                                        align="left"
-                                        width="56"
-                                        contentClasses="py-3 bg-slate-900/95 backdrop-blur border border-white/10"
+                                <div className="mt-3 space-y-1">
+                                    <NavLink href="#" active={false}>
+                                        Billing & Payments
+                                    </NavLink>
+                                    <NavLink
+                                        href={route('admin.slider.index')}
+                                        active={route().current('admin.slider.*')}
                                     >
-                                        <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
-                                            Account & Admin
-                                        </div>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                            className="flex items-center gap-3"
-                                        >
-                                            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                                        Slider Manager
+                                    </NavLink>
+                                    <NavLink href="#" active={false}>
+                                        Inventory
+                                    </NavLink>
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <button
+                                                type="button"
+                                                className="group flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none"
+                                            >
+                                                <span>Settings</span>
                                                 <svg
-                                                    className="h-4 w-4"
+                                                    className="h-4 w-4 text-slate-400 transition group-hover:text-slate-600"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
@@ -132,142 +95,172 @@ export default function AuthenticatedLayout({ header, children }) {
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
                                                         strokeWidth="1.5"
-                                                        d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                        d="m7 10 5 5 5-5"
                                                     />
                                                 </svg>
-                                            </span>
-                                            <span>
-                                                <span className="block text-sm font-semibold text-white">
-                                                    Update Profile
-                                                </span>
-                                                <span className="block text-xs text-white/50">
-                                                    Edit your personal details
-                                                </span>
-                                            </span>
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                            className="flex items-center gap-3"
+                                            </button>
+                                        </Dropdown.Trigger>
+                                        <Dropdown.Content
+                                            align="left"
+                                            width="56"
+                                            contentClasses="py-3 bg-white border border-slate-200"
                                         >
-                                            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-fuchsia-500/15 text-fuchsia-300">
-                                                <svg
-                                                    className="h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="1.5"
-                                                        d="M16.5 10.5V7a4.5 4.5 0 1 0-9 0v3.5m-.75 0h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H6.75a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5Z"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <span>
-                                                <span className="block text-sm font-semibold text-white">
-                                                    Reset Password
+                                            <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                                Account & Admin
+                                            </div>
+                                            <Dropdown.Link
+                                                href={route('profile.edit')}
+                                                className="flex items-center gap-3"
+                                            >
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                        />
+                                                    </svg>
                                                 </span>
-                                                <span className="block text-xs text-white/50">
-                                                    Update your credentials
+                                                <span>
+                                                    <span className="block text-sm font-semibold text-slate-800">
+                                                        Update Profile
+                                                    </span>
+                                                    <span className="block text-xs text-slate-500">
+                                                        Edit your personal details
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href="#"
-                                            className="flex items-center gap-3"
-                                        >
-                                            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
-                                                <svg
-                                                    className="h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="1.5"
-                                                        d="M17 20.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.5 18v-.5m0-4V13m-2.22 1.28-.35-.35m2.57 4.64.35.35M13 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a6 6 0 0 1 10.64-3.88"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <span>
-                                                <span className="block text-sm font-semibold text-white">
-                                                    Users
+                                            </Dropdown.Link>
+                                            <Dropdown.Link
+                                                href={route('profile.edit')}
+                                                className="flex items-center gap-3"
+                                            >
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-fuchsia-50 text-fuchsia-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M16.5 10.5V7a4.5 4.5 0 1 0-9 0v3.5m-.75 0h10.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5H6.75a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5Z"
+                                                        />
+                                                    </svg>
                                                 </span>
-                                                <span className="block text-xs text-white/50">
-                                                    Manage team permissions
+                                                <span>
+                                                    <span className="block text-sm font-semibold text-slate-800">
+                                                        Reset Password
+                                                    </span>
+                                                    <span className="block text-xs text-slate-500">
+                                                        Update your credentials
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href="#"
-                                            className="flex items-center gap-3"
-                                        >
-                                            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-sky-500/15 text-sky-300">
-                                                <svg
-                                                    className="h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="1.5"
-                                                        d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36-6.36-2.12 2.12M8.76 15.24l-2.12 2.12m0-12.72 2.12 2.12m9.48 9.48 2.12 2.12M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <span>
-                                                <span className="block text-sm font-semibold text-white">
-                                                    Language
+                                            </Dropdown.Link>
+                                            <Dropdown.Link
+                                                href="#"
+                                                className="flex items-center gap-3"
+                                            >
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M17 20.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.5 18v-.5m0-4V13m-2.22 1.28-.35-.35m2.57 4.64.35.35M13 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a6 6 0 0 1 10.64-3.88"
+                                                        />
+                                                    </svg>
                                                 </span>
-                                                <span className="block text-xs text-white/50">
-                                                    Choose app locale
+                                                <span>
+                                                    <span className="block text-sm font-semibold text-slate-800">
+                                                        Users
+                                                    </span>
+                                                    <span className="block text-xs text-slate-500">
+                                                        Manage team permissions
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
+                                            </Dropdown.Link>
+                                            <Dropdown.Link
+                                                href="#"
+                                                className="flex items-center gap-3"
+                                            >
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36-6.36-2.12 2.12M8.76 15.24l-2.12 2.12m0-12.72 2.12 2.12m9.48 9.48 2.12 2.12M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span>
+                                                    <span className="block text-sm font-semibold text-slate-800">
+                                                        Language
+                                                    </span>
+                                                    <span className="block text-xs text-slate-500">
+                                                        Choose app locale
+                                                    </span>
+                                                </span>
+                                            </Dropdown.Link>
+                                        </Dropdown.Content>
+                                    </Dropdown>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-fuchsia-500/10 p-5 shadow-[0_12px_30px_rgba(79,70,229,0.18)]">
-                            <p className="text-sm font-semibold text-white">
+                        <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                            <p className="text-sm font-semibold text-slate-800">
                                 Today at a glance
                             </p>
-                            <p className="mt-2 text-sm text-white/70">
+                            <p className="mt-2 text-sm text-slate-500">
                                 18 tasks scheduled, 5 active teams, 96% on-time.
                             </p>
-                            <button className="mt-4 w-full rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-white/30 transition hover:-translate-y-0.5 hover:shadow-white/40">
+                            <button className="mt-4 w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500">
                                 Open Operations Room
                             </button>
                         </div>
 
-                        <div className="mt-auto pt-8">
-                            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 shadow-[0_10px_25px_rgba(15,23,42,0.4)]">
-                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-slate-800 to-slate-700 text-xs font-semibold uppercase text-white">
+                        <div className="mt-auto pt-6">
+                            <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold uppercase text-white">
                                     {user.name
                                         .split(' ')
                                         .map((part) => part[0])
                                         .join('')}
                                 </span>
                                 <div className="flex-1">
-                                    <p className="text-sm font-semibold text-white">
+                                    <p className="text-sm font-semibold text-slate-900">
                                         {user.name}
                                     </p>
-                                    <p className="text-xs text-white/60">
+                                    <p className="text-xs text-slate-500">
                                         Operations Manager
                                     </p>
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <button className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white">
+                                        <button className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-500 transition hover:text-slate-700">
                                             <svg
                                                 className="h-4 w-4"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -286,9 +279,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
+                                        <Dropdown.Link href={route('profile.edit')}>
                                             Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
@@ -306,7 +297,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </aside>
 
                 <div className="flex-1">
-                    <nav className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
+                    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white">
                         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
                             <div className="flex items-center gap-3 lg:hidden">
                                 <button
@@ -315,7 +306,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                             (previousState) => !previousState,
                                         )
                                     }
-                                    className="inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 p-2 text-white/70 transition hover:text-white"
+                                    className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-500 transition hover:text-slate-700"
                                 >
                                     <svg
                                         className="h-6 w-6"
@@ -348,24 +339,24 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </svg>
                                 </button>
                                 <Link href="/" className="flex items-center gap-2">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 shadow-lg shadow-indigo-500/30">
-                                        <ApplicationLogo className="h-6 w-6 fill-current text-white" />
+                                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600">
+                                        <ApplicationLogo className="h-5 w-5 fill-current text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-semibold text-white/60">
+                                        <p className="text-xs font-semibold text-slate-400">
                                             Lamaa Cleaning
                                         </p>
-                                        <p className="text-sm font-semibold text-white">
-                                            Operations Panel
+                                        <p className="text-sm font-semibold text-slate-900">
+                                            Admin Panel
                                         </p>
                                     </div>
                                 </Link>
                             </div>
 
                             <div className="hidden flex-1 items-center justify-between gap-6 lg:flex">
-                                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+                                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-500">
                                     <svg
-                                        className="h-4 w-4 text-white/60"
+                                        className="h-4 w-4 text-slate-400"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -381,17 +372,17 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <span>Search for a client or task...</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <button className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white">
+                                    <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:text-slate-900">
                                         Create Quote
                                     </button>
-                                    <button className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110">
+                                    <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500">
                                         Add New Task
                                     </button>
                                     <button
                                         type="button"
-                                        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:text-white"
+                                        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:text-slate-700"
                                     >
-                                        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-400"></span>
+                                        <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-500"></span>
                                         <svg
                                             className="h-5 w-5"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -407,14 +398,41 @@ export default function AuthenticatedLayout({ header, children }) {
                                             />
                                         </svg>
                                     </button>
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 transition hover:text-slate-800">
+                                                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold uppercase text-white">
+                                                    {user.name
+                                                        .split(' ')
+                                                        .map((part) => part[0])
+                                                        .join('')}
+                                                </span>
+                                            </span>
+                                        </Dropdown.Trigger>
+
+                                        <Dropdown.Content>
+                                            <Dropdown.Link
+                                                href={route('profile.edit')}
+                                            >
+                                                Profile
+                                            </Dropdown.Link>
+                                            <Dropdown.Link
+                                                href={route('logout')}
+                                                method="post"
+                                                as="button"
+                                            >
+                                                Sign out
+                                            </Dropdown.Link>
+                                        </Dropdown.Content>
+                                    </Dropdown>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-3 lg:hidden">
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-1 text-sm text-white/80 transition hover:text-white">
-                                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-slate-800 to-slate-700 text-xs font-semibold uppercase text-white">
+                                        <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 transition hover:text-slate-800">
+                                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold uppercase text-white">
                                                 {user.name
                                                     .split(' ')
                                                     .map((part) => part[0])
@@ -444,7 +462,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div
                             className={
                                 (showingNavigationDropdown ? 'block' : 'hidden') +
-                                ' border-t border-white/10 bg-slate-900/80 backdrop-blur lg:hidden'
+                                ' border-t border-slate-200 bg-white lg:hidden'
                             }
                         >
                             <div className="space-y-1 px-4 pb-3 pt-4">
@@ -469,11 +487,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <ResponsiveNavLink href="#">
                                     Reports
                                 </ResponsiveNavLink>
-                                <details className="group rounded-2xl border border-white/10 bg-white/5 px-3 py-2">
-                                    <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold text-white/80">
+                                <details className="group rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                                    <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold text-slate-600">
                                         <span>Settings</span>
                                         <svg
-                                            className="h-4 w-4 text-white/60 transition group-open:rotate-180 group-open:text-white"
+                                            className="h-4 w-4 text-slate-400 transition group-open:rotate-180 group-open:text-slate-600"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -487,11 +505,15 @@ export default function AuthenticatedLayout({ header, children }) {
                                             />
                                         </svg>
                                     </summary>
-                                    <div className="mt-3 space-y-1 border-l border-white/10 pl-3">
-                                        <ResponsiveNavLink href={route('profile.edit')}>
+                                    <div className="mt-3 space-y-1 border-l border-slate-200 pl-3">
+                                        <ResponsiveNavLink
+                                            href={route('profile.edit')}
+                                        >
                                             Update Profile
                                         </ResponsiveNavLink>
-                                        <ResponsiveNavLink href={route('profile.edit')}>
+                                        <ResponsiveNavLink
+                                            href={route('profile.edit')}
+                                        >
                                             Reset Password
                                         </ResponsiveNavLink>
                                         <ResponsiveNavLink href="#">
@@ -504,18 +526,20 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </details>
                             </div>
 
-                            <div className="border-t border-white/10 pb-4 pt-4">
+                            <div className="border-t border-slate-200 pb-4 pt-4">
                                 <div className="px-4">
-                                    <div className="text-base font-medium text-white">
+                                    <div className="text-base font-medium text-slate-900">
                                         {user.name}
                                     </div>
-                                    <div className="text-sm font-medium text-white/60">
+                                    <div className="text-sm font-medium text-slate-500">
                                         {user.email}
                                     </div>
                                 </div>
 
                                 <div className="mt-3 space-y-1">
-                                    <ResponsiveNavLink href={route('profile.edit')}>
+                                    <ResponsiveNavLink
+                                        href={route('profile.edit')}
+                                    >
                                         Profile
                                     </ResponsiveNavLink>
                                     <ResponsiveNavLink
@@ -531,7 +555,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </nav>
 
                     {header && (
-                        <header className="bg-slate-950">
+                        <header className="bg-slate-100">
                             <div className="mx-auto max-w-7xl px-4 pb-4 pt-8 sm:px-6 lg:px-8">
                                 {header}
                             </div>
