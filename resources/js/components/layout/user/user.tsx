@@ -33,6 +33,7 @@ import NiQuestionHexagon from "@/icons/nexture/ni-question-hexagon";
 import NiSettings from "@/icons/nexture/ni-settings";
 import NiUser from "@/icons/nexture/ni-user";
 import NiUsers from "@/icons/nexture/ni-users";
+import { useAdminSession } from "@/hooks/use-admin-session";
 import { postJson } from "@/lib/http";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,10 @@ export default function User() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const { t } = useTranslation();
+  const { user } = useAdminSession();
+
+  const displayName = user?.name ?? "Admin";
+  const displayEmail = user?.email ?? "admin@cleaner.com";
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -82,7 +87,7 @@ export default function User() {
           )}
           onClick={handleToggle}
         >
-          <Box>Laura Ellis</Box>
+          <Box>{displayName}</Box>
           <Avatar
             alt="avatar"
             src="/images/avatars/avatar-3.jpg"
@@ -133,10 +138,10 @@ export default function User() {
                       <Box className="mb-4 flex flex-col items-center">
                         <Avatar alt="avatar" src="/images/avatars/avatar-3.jpg" className="large mb-2" />
                         <Typography variant="subtitle1" component="p">
-                          Laura Ellis
+                          {displayName}
                         </Typography>
                         <Typography variant="body2" component="p" className="text-text-secondary -mt-2">
-                          laura.ellis@gogo.dev
+                          {displayEmail}
                         </Typography>
                       </Box>
 
