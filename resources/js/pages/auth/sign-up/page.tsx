@@ -23,6 +23,7 @@ import { DEFAULTS } from "@/config";
 import NiCheck from "@/icons/nexture/ni-check";
 import NiCross from "@/icons/nexture/ni-cross";
 import NiCrossSquare from "@/icons/nexture/ni-cross-square";
+import { postJson } from "@/lib/http";
 import { cn } from "@/lib/utils";
 import { useThemeContext } from "@/theme/theme-provider";
 
@@ -43,6 +44,10 @@ const validationSchema = yup.object({
       const hasSymbol = /[^A-Za-z 0-9]/g.test(value);
       return hasSymbol;
     }),
+  passwordConfirmation: yup
+    .string()
+    .required("The field is required")
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 type InputErrorProps = {
@@ -67,6 +72,8 @@ const InputErrorTooltip = ({ title }: InputErrorProps) => {
 export default function Page() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { isDarkMode } = useThemeContext();
 
   const formik = useFormik({
@@ -75,11 +82,46 @@ export default function Page() {
       email: "",
       company: "",
       password: "",
+      passwordConfirmation: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      navigate(DEFAULTS.appRoot);
+    onSubmit: async (values, helpers) => {
+      setServerError(null);
+      setIsSubmitting(true);
+      try {
+        const response = await postJson("/register", {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          password_confirmation: values.passwordConfirmation,
+        });
+
+        if (response.status === 422) {
+          const data = (await response.json()) as { errors?: Record<string, string[]> };
+          if (data.errors) {
+            const formatted = Object.fromEntries(
+              Object.entries(data.errors).map(([field, messages]) => [
+                field === "password_confirmation" ? "passwordConfirmation" : field,
+                messages.join(" "),
+              ]),
+            );
+            helpers.setErrors(formatted);
+          }
+          return;
+        }
+
+        if (!response.ok) {
+          setServerError("Unable to sign up right now. Please try again.");
+          return;
+        }
+
+        const data = (await response.json()) as { redirect?: string };
+        navigate(data.redirect || DEFAULTS.appRoot);
+      } catch (error) {
+        setServerError("Unable to sign up right now. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     validateOnBlur: false,
     validateOnMount: false,
@@ -156,6 +198,12 @@ export default function Page() {
               </Box>
 
               <Box className="flex flex-col gap-5">
+                {serverError && (
+                  <Alert severity="error">
+                    <AlertTitle>Sign up failed</AlertTitle>
+                    {serverError}
+                  </Alert>
+                )}
                 <Box className="flex flex-col gap-2 md:flex-row">
                   <Button variant="outlined" color="grey" className="flex-none md:w-1/2">
                     <Box className="mr-2">{googleSVG()}</Box>Sign in with Google
@@ -285,6 +333,24 @@ export default function Page() {
                       </span>
                     </Typography>
                   </FormControl>
+                  <FormControl className="outlined" variant="standard" size="small">
+                    <FormLabel component="label" className="flex flex-row">
+                      Confirm password{" "}
+                      {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
+                        <InputErrorTooltip title={formik.errors.passwordConfirmation} />
+                      )}
+                    </FormLabel>
+                    <Input
+                      id="passwordConfirmation"
+                      name="passwordConfirmation"
+                      placeholder=""
+                      autoComplete="off"
+                      value={formik.values.passwordConfirmation}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      type="password"
+                    />
+                  </FormControl>
                   {submitted && !formik.isValid && (
                     <Alert severity="error" icon={<NiCrossSquare />} className="neutral bg-background-paper/60! mb-4">
                       <AlertTitle variant="subtitle2">The following inputs have errors!</AlertTitle>
@@ -309,8 +375,8 @@ export default function Page() {
                     >
                       Reset Password
                     </Link>
-                    <Button type="submit" variant="contained" className="mb-4">
-                      Continue
+                    <Button type="submit" variant="contained" className="mb-4" disabled={isSubmitting}>
+                      {isSubmitting ? "Signing up..." : "Continue"}
                     </Button>
                   </Box>
 

@@ -3,7 +3,7 @@ import UserModeSwitch from "./user-mode-switch";
 import UserThemeSwitch from "./user-theme-switch";
 import { SyntheticEvent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   Accordion,
@@ -33,6 +33,7 @@ import NiQuestionHexagon from "@/icons/nexture/ni-question-hexagon";
 import NiSettings from "@/icons/nexture/ni-settings";
 import NiUser from "@/icons/nexture/ni-user";
 import NiUsers from "@/icons/nexture/ni-users";
+import { postJson } from "@/lib/http";
 import { cn } from "@/lib/utils";
 
 export default function User() {
@@ -52,6 +53,21 @@ export default function User() {
   };
 
   const navigate = useNavigate();
+  const handleSignOut = async () => {
+    setOpen(false);
+    try {
+      const response = await postJson("/logout");
+      if (response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { redirect?: string };
+        navigate(data.redirect || "/login");
+        return;
+      }
+    } catch (error) {
+      // no-op
+    }
+
+    navigate("/login");
+  };
 
   return (
     <>
@@ -287,14 +303,7 @@ export default function User() {
                         </MenuItem>
                       </MenuList>
                       <Box className="my-8"></Box>
-                      <Button
-                        component={Link}
-                        to="/login"
-                        variant="outlined"
-                        size="tiny"
-                        color="grey"
-                        className="w-full"
-                      >
+                      <Button variant="outlined" size="tiny" color="grey" className="w-full" onClick={handleSignOut}>
                         {t("user-sign-out")}
                       </Button>
                     </Box>
