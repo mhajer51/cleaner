@@ -38,6 +38,7 @@ const Trigger = ({ children }) => {
 const Content = ({
     align = 'right',
     width = '48',
+    position = 'bottom',
     contentClasses = 'py-2 bg-white border border-slate-200',
     children,
 }) => {
@@ -51,10 +52,22 @@ const Content = ({
         alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
     }
 
+    let positionClasses = 'top-full mt-2';
+
+    if (position === 'top') {
+        positionClasses = 'bottom-full mb-2';
+    }
+
     let widthClasses = '';
 
     if (width === '48') {
         widthClasses = 'w-48';
+    } else if (width === '56') {
+        widthClasses = 'w-56';
+    } else if (width === '64') {
+        widthClasses = 'w-64';
+    } else if (width === 'full') {
+        widthClasses = 'w-full';
     }
 
     return (
@@ -69,7 +82,7 @@ const Content = ({
                 leaveTo="opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`absolute z-50 rounded-md shadow-lg ${alignmentClasses} ${positionClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
                     <div
