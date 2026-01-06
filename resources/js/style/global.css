@@ -1,20 +1,14 @@
-/* --------------------------- */
-/* Global */
-/* --------------------------- */
+@import "tailwindcss";
+@config "../../../tailwind.config.ts";
 
-:root {
-  --font-body: "Mulish", ui-sans-serif;
-  --font-heading: "Urbanist", ui-sans-serif;
-}
-/*
-  Define the CSS layer order.
-  Note: MUI overrides this when loaded with enableCssLayer: true.
-  We use MuiLayerOverride component in ThemeProvider to enforce this order.
-*/
+/* باقي ملفك بعدهم مباشرة */
 @layer theme, base, mui, components, utilities;
 
-@import "tailwindcss";
-@config "./../tailwind.config.ts";
+:root {
+    --font-body: "Mulish", ui-sans-serif;
+    --font-heading: "Urbanist", ui-sans-serif;
+}
+
 
 
 /* --------- Theme --------- */

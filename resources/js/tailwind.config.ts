@@ -5,7 +5,9 @@ import { Screens } from "@/types/types";
 
 const config: Config = {
   important: "html",
-    content: ["./**/*.{ts,tsx}"],
+    content: [
+        "./**/**/*.{js,jsx,ts,tsx,vue,blade.php}",
+    ],
     theme: {
     extend: {
       fontFamily: {
