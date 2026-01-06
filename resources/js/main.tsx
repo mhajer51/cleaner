@@ -14,6 +14,6 @@ LicenseInfo.setLicenseKey(import.meta.env.VITE_MUIX_LICENSE_KEY || "");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-      <AppLayout />
+    <AppLayout />
   </StrictMode>,
 );

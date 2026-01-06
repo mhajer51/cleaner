@@ -85,13 +85,13 @@ export default function DocsGettingStartedFileStructure() {
                 >
                   {`+-- .husky                                // Husky auto-generated files
 +-- public                                // Images, favicons and initial loader
-    |
+    | 
     +-- favicon                           // Favicons of the project
     +-- images                            // Images of the project
     |-- initial-loader.css                // Loader styling of the project
     |-- initial-loader.js                 // Loader script of the project
 +-- src                                   // Source code of the project
-    |
+    | 
     +-- components                        // Components used project wide such as Header, Logo, Menu and so on
     +-- hooks                             // Basic hooks for menu, charts and screens
     +-- i18n                              // Multi-language files and translations
@@ -101,7 +101,7 @@ export default function DocsGettingStartedFileStructure() {
     +-- style                             // All the CSS files
     +-- theme                             // Theme provider and MUI theme overrides
     +-- types                             // Custom types to extend MUI
-    |-- AppLayout.tsx                           // The main layout of the application
+    |-- AppLayout.tsx                     // The main layout of the application
     |-- config.ts                         // The main theme configuration
     |-- constants.ts                      // Variable definitions that are used in the theme
     |-- main.tsx                          // The initial file of the application
