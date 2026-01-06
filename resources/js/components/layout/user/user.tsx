@@ -289,7 +289,7 @@ export default function User() {
                       <Box className="my-8"></Box>
                       <Button
                         component={Link}
-                        to="/auth/sign-in"
+                        to="/login"
                         variant="outlined"
                         size="tiny"
                         color="grey"

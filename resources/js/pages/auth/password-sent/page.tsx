@@ -37,7 +37,7 @@ export default function Page() {
                 </Typography>
                 <Typography variant="body1" className="text-text-secondary">
                   If you already have an account, please{" "}
-                  <Link to="/auth/sign-in" className="link-primary link-underline-hover">
+                  <Link to="/login" className="link-primary link-underline-hover">
                     sign in
                   </Link>
                   .

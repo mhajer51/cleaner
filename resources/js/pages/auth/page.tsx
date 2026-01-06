@@ -5,7 +5,7 @@ export default function Auth() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/auth/sign-in");
+    navigate("/login");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

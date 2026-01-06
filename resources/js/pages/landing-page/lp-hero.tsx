@@ -40,7 +40,7 @@ export default function LPHero() {
               color="primary"
               variant="contained"
               startIcon={<NiSendUpRight size={"large"} />}
-              to="/auth/sign-in"
+              to="/login"
               target="_blank"
               component={Link}
             >

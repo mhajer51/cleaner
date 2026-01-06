@@ -54,17 +54,59 @@ const InputErrorTooltip = ({ title }: InputErrorProps) => {
 export default function Page() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { isDarkMode } = useThemeContext();
 
   const formik = useFormik({
     initialValues: {
-      email: "info@gogo.dev",
-      password: "gogo",
+      email: "",
+      password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      navigate(DEFAULTS.appRoot);
+    onSubmit: async (values, helpers) => {
+      setServerError(null);
+      setIsSubmitting(true);
+      try {
+        const csrfToken = document
+          .querySelector<HTMLMetaElement>('meta[name="csrf-token"]')
+          ?.getAttribute("content");
+
+        const response = await fetch("/login", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            ...(csrfToken ? { "X-CSRF-TOKEN": csrfToken } : {}),
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (response.status === 422) {
+          const data = (await response.json()) as { errors?: Record<string, string[]> };
+          if (data.errors) {
+            helpers.setErrors(
+              Object.fromEntries(
+                Object.entries(data.errors).map(([field, messages]) => [field, messages.join(" ")])
+              )
+            );
+          }
+          return;
+        }
+
+        if (!response.ok) {
+          setServerError("Unable to sign in right now. Please try again.");
+          return;
+        }
+
+        const data = (await response.json()) as { redirect?: string };
+        navigate(data.redirect || DEFAULTS.appRoot);
+      } catch (error) {
+        setServerError("Unable to sign in right now. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     validateOnBlur: false,
     validateOnMount: false,
@@ -138,6 +180,12 @@ export default function Page() {
               </Box>
 
               <Box className="flex flex-col gap-5">
+                {serverError && (
+                  <Alert severity="error">
+                    <AlertTitle>Sign in failed</AlertTitle>
+                    {serverError}
+                  </Alert>
+                )}
                 <Box className="flex flex-col gap-2 md:flex-row">
                   <Button variant="outlined" color="grey" className="flex-none md:w-1/2">
                     <Box className="mr-2">{googleSVG()}</Box>Sign in with Google
@@ -226,23 +274,23 @@ export default function Page() {
                   )}
                   <Box className="flex flex-col gap-2">
                     <Link
-                      to="/auth/password-reset"
+                      to="/forgot-password"
                       className="link-text-secondary link-underline-hover text-center text-sm font-semibold"
                     >
                       Reset Password
                     </Link>
-                    <Button type="submit" variant="contained" className="mb-4">
-                      Continue
+                    <Button type="submit" variant="contained" className="mb-4" disabled={isSubmitting}>
+                      {isSubmitting ? "Signing in..." : "Continue"}
                     </Button>
                   </Box>
 
                   <Typography variant="body2" className="text-text-secondary">
                     By clicking Continue, Sign in with Google, or Sign in with GitHub, you agree to the{" "}
-                    <Link target="_blank" to="/auth/terms-and-conditions" className="link-primary link-underline-hover">
+                    <Link target="_blank" to="/terms-and-conditions" className="link-primary link-underline-hover">
                       Terms and Conditions
                     </Link>{" "}
                     and{" "}
-                    <Link target="_blank" to="/auth/privacy-policy" className="link-primary link-underline-hover">
+                    <Link target="_blank" to="/privacy-policy" className="link-primary link-underline-hover">
                       Privacy Policy
                     </Link>
                     .
@@ -256,7 +304,7 @@ export default function Page() {
                 </Typography>
                 <Typography variant="body1" className="text-text-secondary">
                   New to Gogo? Please use your email to{" "}
-                  <Link to="/auth/sign-up" className="link-primary link-underline-hover">
+                  <Link to="/register" className="link-primary link-underline-hover">
                     sign up
                   </Link>
                   .
