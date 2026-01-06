@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthenticatedSessionController as AdminAuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [AdminAuthenticatedSessionController::class, 'create'])
+            ->name('login');
+        Route::post('/login', [AdminAuthenticatedSessionController::class, 'store'])
+            ->name('login.store');
+    });
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return Inertia::render('App');
+        })->name('dashboard');
+
+        Route::post('/logout', [AdminAuthenticatedSessionController::class, 'destroy'])
+            ->name('logout');
+    });
 });
 
 require __DIR__.'/auth.php';
