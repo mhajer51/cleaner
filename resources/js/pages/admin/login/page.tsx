@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
@@ -19,9 +19,11 @@ import {
 } from "@mui/material";
 
 import Logo from "@/components/logo/logo";
+import { useAdminSession } from "@/hooks/use-admin-session";
 import NiEyeClose from "@/icons/nexture/ni-eye-close";
 import NiEyeOpen from "@/icons/nexture/ni-eye-open";
 import { postJson } from "@/lib/http";
+import Loading from "@/pages/loading";
 
 const validationSchema = yup.object({
   email: yup.string().required("The field is required").email("Enter a valid email"),
@@ -30,9 +32,16 @@ const validationSchema = yup.object({
 
 export default function Page() {
   const navigate = useNavigate();
+  const { authenticated, loading } = useAdminSession();
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!loading && authenticated) {
+      navigate("/admin/dashboards", { replace: true });
+    }
+  }, [authenticated, loading, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -64,7 +73,7 @@ export default function Page() {
         }
 
         const data = (await response.json()) as { redirect?: string };
-        navigate(data.redirect || "/admin/dashboard");
+        navigate(data.redirect || "/admin/dashboards");
       } catch (error) {
         setServerError("Unable to sign in right now. Please try again.");
       } finally {
@@ -84,6 +93,10 @@ export default function Page() {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Box className="bg-waves flex min-h-screen w-full items-center justify-center bg-cover bg-center p-4">

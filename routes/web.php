@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthenticatedSessionController as AdminAuthenticatedSessionController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -19,10 +20,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('login.store');
     });
 
+    Route::get('/session', function () {
+        return response()->json([
+            'authenticated' => Auth::guard('admin')->check(),
+        ]);
+    })->name('session');
+
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', function () {
+        Route::get('/dashboards', function () {
             return Inertia::render('App');
         })->name('dashboard');
+
+        Route::redirect('/dashboard', '/admin/dashboards');
 
         Route::get('/slider', [SliderController::class, 'index'])
             ->name('slider.index');
