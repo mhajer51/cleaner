@@ -1,7 +1,6 @@
 import { createContext, type PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import { DEFAULTS } from "@/config";
-import { LOCAL_STORAGE_KEYS } from "@/constants";
 import { useMenu } from "@/hooks/use-menu";
 import type { MenuItem } from "@/types/types";
 import { MenuShowState } from "@/types/types";
@@ -18,7 +17,6 @@ function useLayoutContextValue() {
   const leftMenu = useMenu({
     primaryBreakpoint: "md",
     secondaryBreakpoint: "xl",
-    storageKey: LOCAL_STORAGE_KEYS.leftMenuType,
     defaultMenuType: DEFAULTS.leftMenuType,
     menuDefaultWidth: DEFAULTS.leftMenuWidth,
   });

@@ -5,27 +5,17 @@ import { useLocalStorage } from "react-use";
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 
 import { DEFAULTS } from "@/config";
-import {
-  LOCAL_STORAGE_KEYS as LS_KEYS,
-  ModeVariant,
-  THEME_MODE_OPTIONS,
-  THEME_OPTIONS,
-  ThemeVariant,
-} from "@/constants";
+import { LOCAL_STORAGE_KEYS as LS_KEYS, ModeVariant, THEME_MODE_OPTIONS, THEME_OPTIONS, ThemeVariant } from "@/constants";
 import {
   CheckboxSmallChecked,
   CheckboxSmallEmptyOutlined,
   CheckboxSmallIndeterminate,
 } from "@/icons/form/mui-checkbox";
-import { ContentType } from "@/types/types";
-
 type ThemeContextType = {
   theme: ThemeVariant;
   setTheme: (theme: ThemeVariant) => void;
   mode: ModeVariant;
   setMode: (mode: ModeVariant) => void;
-  content: ContentType;
-  setContent: (content: ContentType) => void;
   isDarkMode: boolean;
 };
 
@@ -258,8 +248,6 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     classList.remove(...removeList);
   }, [theme, mode]);
 
-  const [content, setContent] = useLocalStorage<ContentType>(LS_KEYS.contentType, DEFAULTS.contentType);
-
   useEffect(() => {
     setTimeout(
       () => document.documentElement.style.setProperty("--layout-duration", `${DEFAULTS.transitionDuration}ms`),
@@ -274,8 +262,6 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
         setTheme,
         mode: mode ?? DEFAULTS.themeMode,
         setMode,
-        content: content ?? DEFAULTS.contentType,
-        setContent,
         isDarkMode,
       }}
     >

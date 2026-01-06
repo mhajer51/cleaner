@@ -32,11 +32,6 @@ export type MenuItem = {
   hideInMenu?: boolean;
 };
 
-export enum ContentType {
-  Boxed = "boxed",
-  Fluid = "fluid",
-}
-
 export enum MenuType {
   Minimal = "minimal",
   Comfort = "comfort",

@@ -19,6 +19,4 @@ export const COOKIE_KEYS = { locale: `${storagePrefix}-locale` };
 export const LOCAL_STORAGE_KEYS = {
   themeColor: `${storagePrefix}-theme-color`,
   themeMode: `${storagePrefix}-theme-mode`,
-  leftMenuType: `${storagePrefix}-left-menu-type`,
-  contentType: `${storagePrefix}-content-type`,
 };
