@@ -30,12 +30,12 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </Link>
 
-                        <div className="mt-8 flex flex-1 flex-col space-y-5 overflow-hidden">
+                        <div className="mt-8 flex flex-1 flex-col space-y-5 min-h-0">
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                                     Main
                                 </p>
-                                <div className="mt-3 flex max-h-full flex-1 flex-col space-y-1 overflow-y-auto pr-2">
+                                <div className="mt-3 flex flex-1 min-h-0 flex-col space-y-1 overflow-y-auto pr-2">
                                     <NavLink
                                         href={route('dashboard')}
                                         active={route().current('dashboard')}
@@ -74,6 +74,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Content
                                             align="left"
                                             width="full"
+                                            position="bottom"
                                             contentClasses="py-3 bg-white border border-slate-200 shadow-xl"
                                         >
                                             <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -215,6 +216,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <Dropdown.Content
                                         align="left"
                                         width="56"
+                                        position="top"
                                         contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
                                     >
                                         <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -354,6 +356,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Content
                                             align="right"
                                             width="56"
+                                            position="bottom"
                                             contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
                                         >
                                             <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -430,6 +433,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <Dropdown.Content
                                         align="right"
                                         width="56"
+                                        position="bottom"
                                         contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
                                     >
                                         <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
