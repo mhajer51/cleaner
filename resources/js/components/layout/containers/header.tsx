@@ -3,7 +3,6 @@ import Notifications from "../notifications/notifications";
 import Search from "../search/search";
 import Shortcuts from "../shortcuts/shortcuts";
 import User from "../user/user";
-import VersionSelect from "../version-select/version-select";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -82,21 +81,12 @@ export default function Header() {
             <Logo classNameFull="ml-2 hidden md:block" classNameMobile="ml-2 md:hidden" />
           </Link>
 
-          {/* Version select */}
-          <Fade in={!rightButtonsVisibleMobile || !isMobile}>
-            <Box>
-              <VersionSelect className={cn("sm:flex!", rightButtonsVisibleMobile ? "hidden" : "flex")} />
-            </Box>
-          </Fade>
         </Box>
 
         {/* Right buttons */}
         <Box className="flex flex-row sm:gap-1">
           <Fade in={rightButtonsVisibleMobile || !isMobile}>
             <Box className={cn("hidden flex-row sm:flex! sm:gap-1", rightButtonsVisibleMobile ? "flex" : "hidden")}>
-              <Search />
-              <Shortcuts />
-              <Notifications />
               <Mode />
             </Box>
           </Fade>

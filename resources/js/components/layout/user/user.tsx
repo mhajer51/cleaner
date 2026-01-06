@@ -140,92 +140,7 @@ export default function User() {
                         </Typography>
                       </Box>
 
-                      <Box>
-                        <Accordion>
-                          <AccordionSummary className="group">
-                            <Button
-                              component="div"
-                              variant="pastel"
-                              size="large"
-                              color="text-primary"
-                              className="full-width-button hover:text-primary group-aria-expanded:text-primary group-aria-expanded:rounded-b-none hover:bg-gray-500/10"
-                              startIcon={<NiUsers size={20} />}
-                              endIcon={<NiChevronRightSmall size={20} className="accordion-rotate" />}
-                            >
-                              <Box className="flex w-full flex-row items-center justify-between">
-                                <Typography variant="button" component="span">
-                                  {t("user-accounts")}
-                                </Typography>
-                                <AvatarGroup max={3} className="tiny transition-opacity group-aria-expanded:opacity-0">
-                                  <Avatar className="tiny" alt="Laura Ellis" src="/images/avatars/avatar-3.jpg" />
-                                  <Avatar className="tiny" alt="Travis Howard" src="/images/avatars/avatar-2.jpg" />
-                                  <Avatar className="tiny" alt="Cindy Baker" src="/images/avatars/avatar-7.jpg" />
-                                  <Avatar className="tiny" alt="Agnes Walker" src="/images/avatars/avatar-4.jpg" />
-                                </AvatarGroup>
-                              </Box>
-                            </Button>
-                          </AccordionSummary>
-                          <AccordionDetails className="bg-grey-500/10 rounded-b-lg px-4 pt-2 pb-4">
-                            <MenuList className="mb-4 p-0">
-                              <MenuItem onClick={handleClose}>
-                                <ListItemIcon className="mr-2">
-                                  <Avatar className="tiny" alt="Laura Ellis" src="/images/avatars/avatar-3.jpg" />
-                                </ListItemIcon>
-                                <Box>
-                                  <Typography variant="body1" component="div">
-                                    Laura Ellis
-                                  </Typography>
-                                  <Typography variant="body2" component="div" className="text-text-secondary -mt-1">
-                                    laura@gogo.dev
-                                  </Typography>
-                                </Box>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                <ListItemIcon className="mr-2">
-                                  <Avatar className="tiny" alt="Travis Howard" src="/images/avatars/avatar-2.jpg" />
-                                </ListItemIcon>
-                                <Box>
-                                  <Typography variant="body1" component="div">
-                                    Travis Howard
-                                  </Typography>
-                                  <Typography variant="body2" component="div" className="text-text-secondary -mt-1">
-                                    travis@gogo.dev
-                                  </Typography>
-                                </Box>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                <ListItemIcon className="mr-2">
-                                  <Avatar className="tiny" alt="Cindy Baker" src="/images/avatars/avatar-7.jpg" />
-                                </ListItemIcon>
-                                <Box>
-                                  <Typography variant="body1" component="div">
-                                    Cindy Baker
-                                  </Typography>
-                                  <Typography variant="body2" component="div" className="text-text-secondary -mt-1">
-                                    cindy@gogo.dev
-                                  </Typography>
-                                </Box>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                <ListItemIcon className="mr-2">
-                                  <Avatar className="tiny" alt="Agnes Walker" src="/images/avatars/avatar-4.jpg" />
-                                </ListItemIcon>
-                                <Box>
-                                  <Typography variant="body1" component="div">
-                                    Agnes Walker
-                                  </Typography>
-                                  <Typography variant="body2" component="div" className="text-text-secondary -mt-1">
-                                    agnes@gogo.dev
-                                  </Typography>
-                                </Box>
-                              </MenuItem>
-                            </MenuList>
-                            <Button variant="outlined" size="tiny" color="grey" className="w-full">
-                              {t("user-add-account")}
-                            </Button>
-                          </AccordionDetails>
-                        </Accordion>
-                      </Box>
+
                       <Divider className="large" />
                       <MenuList className="p-0">
                         <MenuItem
@@ -250,57 +165,12 @@ export default function User() {
                           </ListItemIcon>
                           {t("user-profile")}
                         </MenuItem>
-                        <MenuItem
-                          onClick={(event) => {
-                            handleClose(event);
-                            navigate("/pages/support/issues");
-                          }}
-                        >
-                          <ListItemIcon>
-                            <NiBuilding size={20} />
-                          </ListItemIcon>
-                          {t("user-issues")}
-                        </MenuItem>
-                        <MenuItem
-                          onClick={(event) => {
-                            handleClose(event);
-                            navigate("/pages/user/projects");
-                          }}
-                        >
-                          <ListItemIcon>
-                            <NiFolder size={20} />
-                          </ListItemIcon>
-                          {t("user-projects")}
-                        </MenuItem>
+
                         <Divider className="large" />
 
                         <UserModeSwitch />
                         <UserThemeSwitch />
                         <UserLanguageSwitch />
-
-                        <Divider className="large" />
-                        <MenuItem
-                          onClick={(event) => {
-                            handleClose(event);
-                            navigate("/docs");
-                          }}
-                        >
-                          <ListItemIcon>
-                            <NiDocumentFull size={20} />
-                          </ListItemIcon>
-                          {t("user-documentation")}
-                        </MenuItem>
-                        <MenuItem
-                          onClick={(event) => {
-                            handleClose(event);
-                            navigate("/pages/miscellaneous/knowledge-base");
-                          }}
-                        >
-                          <ListItemIcon>
-                            <NiQuestionHexagon size={20} />
-                          </ListItemIcon>
-                          {t("user-help")}
-                        </MenuItem>
                       </MenuList>
                       <Box className="my-8"></Box>
                       <Button variant="outlined" size="tiny" color="grey" className="w-full" onClick={handleSignOut}>
