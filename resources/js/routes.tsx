@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { leftMenuBottomItems, leftMenuItems } from "@/menu-items";
 import AppLayout from "@/pages/app/layout";
-import AuthLayout from "@/pages/auth/layout";
 import Loading from "@/pages/loading.tsx";
 import NotFound from "@/pages/not-found";
 import { MenuItem } from "@/types/types";
@@ -12,15 +11,6 @@ import { MenuItem } from "@/types/types";
 const modules = import.meta.glob("./pages/**/page.tsx");
 
 const authPageMap: Record<string, string> = {
-  "/login": "/auth/sign-in",
-  "/register": "/auth/sign-up",
-  "/forgot-password": "/auth/password-reset",
-  "/reset-password": "/auth/password-new",
-  "/password-sent": "/auth/password-sent",
-  "/verify-email": "/auth/get-verification",
-  "/verify-email/confirm": "/auth/set-verification",
-  "/terms-and-conditions": "/auth/terms-and-conditions",
-  "/privacy-policy": "/auth/privacy-policy",
   "/admin/login": "/admin/login",
 };
 
@@ -34,8 +24,6 @@ const lazyLoad = (path: string) => {
     key = `./pages${authPageMap[path]}/page.tsx`;
   } else if (path.startsWith("/admin")) {
     key = `./pages${path}/page.tsx`;
-  } else if (path.startsWith("/auth")) {
-    key = `./pages/auth${path.substring(5)}/page.tsx`; // Remove "/auth"
   } else {
     key = `./pages/app${path}/page.tsx`;
   }
@@ -79,16 +67,6 @@ const generateRoutesFromMenuItems = (menuItems: MenuItem[]): React.ReactElement[
 // Generate auth routes
 const generateAuthRoutes = (): React.ReactElement[] => {
   return [
-    <Route key="login" path="/login" element={lazyLoad("/login")} />,
-    <Route key="register" path="/register" element={lazyLoad("/register")} />,
-    <Route key="forgot-password" path="/forgot-password" element={lazyLoad("/forgot-password")} />,
-    <Route key="reset-password" path="/reset-password" element={lazyLoad("/reset-password")} />,
-    <Route key="reset-password-token" path="/reset-password/:token" element={lazyLoad("/reset-password")} />,
-    <Route key="password-sent" path="/password-sent" element={lazyLoad("/password-sent")} />,
-    <Route key="verify-email" path="/verify-email" element={lazyLoad("/verify-email")} />,
-    <Route key="verify-email-confirm" path="/verify-email/confirm" element={lazyLoad("/verify-email/confirm")} />,
-    <Route key="terms-and-conditions" path="/terms-and-conditions" element={lazyLoad("/terms-and-conditions")} />,
-    <Route key="privacy-policy" path="/privacy-policy" element={lazyLoad("/privacy-policy")} />,
     <Route key="admin-login" path="/admin/login" element={lazyLoad("/admin/login")} />,
   ];
 };
@@ -104,6 +82,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Landing page route */}
       <Route path="/" element={lazyLoad("/")} />
+      <Route path="/login" element={<Navigate to="/admin/login" replace />} />
       {/* App routes with AppLayout */}
       <Route element={<AppLayout />}>
         <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
@@ -112,10 +91,8 @@ const AppRoutes = () => {
         {mainRoutes}
         {bottomRoutes}
       </Route>
-      {/* Auth routes with AuthLayout */}
-      <Route element={<AuthLayout />}>
-        {authRoutes}
-      </Route>
+      {/* Admin auth route */}
+      {authRoutes}
 
       {/* 404 route */}
       <Route path="/404" element={<NotFound />} />
