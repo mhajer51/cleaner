@@ -86,7 +86,8 @@ const AppRoutes = () => {
       {/* App routes with AppLayout */}
       <Route element={<AppLayout />}>
         <Route path="/admin" element={<Navigate to="/admin/dashboards" replace />} />
-        <Route path="/admin/dashboard" element={lazyLoad("/admin/dashboard")} />
+        <Route path="/admin/dashboard" element={<Navigate to="/admin/dashboards" replace />} />
+        <Route path="/admin/dashboards" element={lazyLoad("/admin/dashboards")} />
         {/* Routes generated from menu items */}
         {mainRoutes}
         {bottomRoutes}

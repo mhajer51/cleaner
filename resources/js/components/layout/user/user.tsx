@@ -56,17 +56,17 @@ export default function User() {
   const handleSignOut = async () => {
     setOpen(false);
     try {
-      const response = await postJson("/logout");
+      const response = await postJson("/admin/logout");
       if (response.ok) {
         const data = (await response.json().catch(() => ({}))) as { redirect?: string };
-        navigate(data.redirect || "/login");
+        navigate(data.redirect || "/admin/login");
         return;
       }
     } catch (error) {
       // no-op
     }
 
-    navigate("/login");
+    navigate("/admin/login");
   };
 
   return (
