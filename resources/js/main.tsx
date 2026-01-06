@@ -8,12 +8,12 @@ import { createRoot } from "react-dom/client";
 
 import { LicenseInfo } from "@mui/x-license";
 
-import App from "@/App";
+import AppLayout from "@/AppLayout";
 
 LicenseInfo.setLicenseKey(import.meta.env.VITE_MUIX_LICENSE_KEY || "");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+      <AppLayout />
   </StrictMode>,
 );

@@ -1,4 +1,4 @@
-import config from "../../tailwind.config";
+import config from "../../../tailwind.config";
 import { create } from "tw-screens";
 
 import type { Screens } from "@/types/types";
