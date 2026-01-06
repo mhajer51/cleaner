@@ -21,6 +21,7 @@ const authPageMap: Record<string, string> = {
   "/verify-email/confirm": "/auth/set-verification",
   "/terms-and-conditions": "/auth/terms-and-conditions",
   "/privacy-policy": "/auth/privacy-policy",
+  "/admin/login": "/admin/login",
 };
 
 // Lazy load page components
@@ -31,6 +32,8 @@ const lazyLoad = (path: string) => {
     key = "./pages/page.tsx";
   } else if (authPageMap[path]) {
     key = `./pages${authPageMap[path]}/page.tsx`;
+  } else if (path.startsWith("/admin")) {
+    key = `./pages${path}/page.tsx`;
   } else if (path.startsWith("/auth")) {
     key = `./pages/auth${path.substring(5)}/page.tsx`; // Remove "/auth"
   } else {
@@ -86,6 +89,7 @@ const generateAuthRoutes = (): React.ReactElement[] => {
     <Route key="verify-email-confirm" path="/verify-email/confirm" element={lazyLoad("/verify-email/confirm")} />,
     <Route key="terms-and-conditions" path="/terms-and-conditions" element={lazyLoad("/terms-and-conditions")} />,
     <Route key="privacy-policy" path="/privacy-policy" element={lazyLoad("/privacy-policy")} />,
+    <Route key="admin-login" path="/admin/login" element={lazyLoad("/admin/login")} />,
   ];
 };
 
@@ -102,6 +106,8 @@ const AppRoutes = () => {
       <Route path="/" element={lazyLoad("/")} />
       {/* App routes with AppLayout */}
       <Route element={<AppLayout />}>
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+        <Route path="/admin/dashboard" element={lazyLoad("/admin/dashboard")} />
         {/* Routes generated from menu items */}
         {mainRoutes}
         {bottomRoutes}
