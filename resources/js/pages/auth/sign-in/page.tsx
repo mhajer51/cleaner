@@ -25,6 +25,7 @@ import { DEFAULTS } from "@/config";
 import NiCrossSquare from "@/icons/nexture/ni-cross-square";
 import NiEyeClose from "@/icons/nexture/ni-eye-close";
 import NiEyeOpen from "@/icons/nexture/ni-eye-open";
+import { postJson } from "@/lib/http";
 import { useThemeContext } from "@/theme/theme-provider";
 
 const validationSchema = yup.object({
@@ -68,20 +69,7 @@ export default function Page() {
       setServerError(null);
       setIsSubmitting(true);
       try {
-        const csrfToken = document
-          .querySelector<HTMLMetaElement>('meta[name="csrf-token"]')
-          ?.getAttribute("content");
-
-        const response = await fetch("/login", {
-          method: "POST",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            ...(csrfToken ? { "X-CSRF-TOKEN": csrfToken } : {}),
-          },
-          body: JSON.stringify(values),
-        });
+        const response = await postJson("/login", values);
 
         if (response.status === 422) {
           const data = (await response.json()) as { errors?: Record<string, string[]> };

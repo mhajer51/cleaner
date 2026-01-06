@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import * as yup from "yup";
 
 import {
@@ -23,9 +23,11 @@ import { DEFAULTS } from "@/config";
 import NiCheck from "@/icons/nexture/ni-check";
 import NiCross from "@/icons/nexture/ni-cross";
 import NiCrossSquare from "@/icons/nexture/ni-cross-square";
+import { postJson } from "@/lib/http";
 import { cn } from "@/lib/utils";
 
 const validationSchema = yup.object({
+  email: yup.string().required("The field is required").email("Enter a valid email"),
   password: yup
     .string()
     .required("The field is required")
@@ -39,6 +41,10 @@ const validationSchema = yup.object({
       const hasSymbol = /[^A-Za-z 0-9]/g.test(value);
       return hasSymbol;
     }),
+  passwordConfirmation: yup
+    .string()
+    .required("The field is required")
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 type InputErrorProps = {
@@ -62,16 +68,57 @@ const InputErrorTooltip = ({ title }: InputErrorProps) => {
 
 export default function Page() {
   const navigate = useNavigate();
+  const { token } = useParams<{ token: string }>();
+  const [searchParams] = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasToken = Boolean(token);
 
   const formik = useFormik({
     initialValues: {
+      email: searchParams.get("email") ?? "",
       password: "",
+      passwordConfirmation: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
-      navigate(DEFAULTS.appRoot);
+    onSubmit: async (values, helpers) => {
+      setServerError(null);
+      setIsSubmitting(true);
+      try {
+        const response = await postJson("/reset-password", {
+          token,
+          email: values.email,
+          password: values.password,
+          password_confirmation: values.passwordConfirmation,
+        });
+
+        if (response.status === 422) {
+          const data = (await response.json()) as { errors?: Record<string, string[]> };
+          if (data.errors) {
+            const formatted = Object.fromEntries(
+              Object.entries(data.errors).map(([field, messages]) => [
+                field === "password_confirmation" ? "passwordConfirmation" : field,
+                messages.join(" "),
+              ]),
+            );
+            helpers.setErrors(formatted);
+          }
+          return;
+        }
+
+        if (!response.ok) {
+          setServerError("Unable to reset your password right now. Please try again.");
+          return;
+        }
+
+        const data = (await response.json()) as { redirect?: string };
+        navigate(data.redirect || DEFAULTS.appRoot);
+      } catch (error) {
+        setServerError("Unable to reset your password right now. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     validateOnBlur: false,
     validateOnMount: false,
@@ -112,6 +159,18 @@ export default function Page() {
               </Box>
 
               <Box className="flex flex-col gap-5">
+                {!hasToken && (
+                  <Alert severity="error">
+                    <AlertTitle>Reset link invalid</AlertTitle>
+                    The password reset link is missing or invalid. Please request a new reset email.
+                  </Alert>
+                )}
+                {serverError && (
+                  <Alert severity="error">
+                    <AlertTitle>Reset failed</AlertTitle>
+                    {serverError}
+                  </Alert>
+                )}
                 <Box
                   component={"form"}
                   onSubmit={(event) => {
@@ -120,6 +179,23 @@ export default function Page() {
                   }}
                   className="flex flex-col"
                 >
+                  <FormControl className="outlined" variant="standard" size="small">
+                    <FormLabel component="label" className="flex flex-row">
+                      Email{" "}
+                      {formik.touched.email && formik.errors.email && (
+                        <InputErrorTooltip title={formik.errors.email} />
+                      )}
+                    </FormLabel>
+                    <Input
+                      id="email"
+                      name="email"
+                      placeholder=""
+                      autoComplete="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  </FormControl>
                   <FormControl className="outlined" variant="standard" size="small">
                     <FormLabel component="label" className="flex flex-row">
                       Password{" "}
@@ -135,6 +211,7 @@ export default function Page() {
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      type="password"
                     />
                     <Typography variant="body2" className="text-text-secondary mt-2 inline-block align-middle">
                       <span className="inline">Must be</span>
@@ -183,6 +260,24 @@ export default function Page() {
                       </span>
                     </Typography>
                   </FormControl>
+                  <FormControl className="outlined" variant="standard" size="small">
+                    <FormLabel component="label" className="flex flex-row">
+                      Confirm password{" "}
+                      {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
+                        <InputErrorTooltip title={formik.errors.passwordConfirmation} />
+                      )}
+                    </FormLabel>
+                    <Input
+                      id="passwordConfirmation"
+                      name="passwordConfirmation"
+                      placeholder=""
+                      autoComplete="off"
+                      value={formik.values.passwordConfirmation}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      type="password"
+                    />
+                  </FormControl>
 
                   {submitted && !formik.isValid && (
                     <Alert severity="error" icon={<NiCrossSquare />} className="neutral bg-background-paper/60! mb-4">
@@ -203,8 +298,8 @@ export default function Page() {
                   )}
 
                   <Box className="flex flex-col gap-2">
-                    <Button type="submit" variant="contained" className="mb-4">
-                      Continue
+                    <Button type="submit" variant="contained" className="mb-4" disabled={isSubmitting || !hasToken}>
+                      {isSubmitting ? "Updating..." : "Continue"}
                     </Button>
                   </Box>
 
