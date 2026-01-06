@@ -11,10 +11,10 @@ export default function LevelTwoSubs() {
           Level Two Subs
         </Typography>
         <Breadcrumbs>
-          <Link color="inherit" to="/dashboards/default">
+          <Link color="inherit" to="/admin/dashboards">
             Home
           </Link>
-          <Link color="inherit" to="/menu-levels">
+          <Link color="inherit" to="/admin/menu-levels">
             Menu Levels
           </Link>
           <Typography variant="body2">Level Two Subs</Typography>

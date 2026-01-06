@@ -11,13 +11,13 @@ export default function LevelThreeSubs() {
           Level Three Subs
         </Typography>
         <Breadcrumbs>
-          <Link color="inherit" to="/dashboards/default">
+          <Link color="inherit" to="/admin/dashboards">
             Home
           </Link>
-          <Link color="inherit" to="/menu-levels">
+          <Link color="inherit" to="/admin/menu-levels">
             Menu Levels
           </Link>
-          <Link color="inherit" to="/menu-levels/level-two-subs">
+          <Link color="inherit" to="/admin/menu-levels/level-two-subs">
             Level Two Subs
           </Link>
           <Typography variant="body2">Level Three Subs</Typography>

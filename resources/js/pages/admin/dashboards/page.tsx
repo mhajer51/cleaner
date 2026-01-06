@@ -37,10 +37,10 @@ export default function Page() {
                         Welcome Laura!
                     </Typography>
                     <Breadcrumbs>
-                        <Link color="inherit" to="/dashboards/default">
+                        <Link color="inherit" to="/admin/dashboards">
                             Home
                         </Link>
-                        <Link color="inherit" to="/dashboards">
+                        <Link color="inherit" to="/admin/dashboards">
                             Dashboards
                         </Link>
                         <Typography variant="body2">Default</Typography>
@@ -85,7 +85,7 @@ export default function Page() {
                             color="grey"
                             variant="surface"
                             component={Link}
-                            to="/dashboards/default/default-titles-inside"
+                            to="/admin/dashboards"
                             startIcon={<NiEnterDown size={"medium"} />}
                         >
                             Titles Inside

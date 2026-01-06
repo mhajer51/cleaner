@@ -38,7 +38,7 @@ export default function Header() {
         style={{ padding: `0 var(--main-padding)` }}
       >
         <Box className="flex h-full flex-row items-center">
-          <Link to="/dashboards/default">
+          <Link to="/admin/dashboards">
             <Logo classNameFull="ml-2 hidden md:block" classNameMobile="ml-2 md:hidden" />
           </Link>
         </Box>
@@ -77,7 +77,7 @@ export default function Header() {
 
         <Box className="flex h-full flex-1 flex-row items-center gap-4 md:gap-6">
           {/* Logo */}
-          <Link to="/dashboards/default">
+          <Link to="/admin/dashboards">
             <Logo classNameFull="ml-2 hidden md:block" classNameMobile="ml-2 md:hidden" />
           </Link>
 
