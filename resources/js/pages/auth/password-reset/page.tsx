@@ -1,19 +1,56 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Box, Button, Divider, FormControl, FormLabel, Input, Paper, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  FormLabel,
+  Input,
+  Paper,
+  Typography,
+} from "@mui/material";
 
 import Logo from "@/components/logo/logo";
+import { postJson } from "@/lib/http";
 
 export default function Page() {
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
   });
+  const [fieldError, setFieldError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    navigate("/");
+    setFieldError(null);
+    setServerError(null);
+    setIsSubmitting(true);
+    try {
+      const response = await postJson("/forgot-password", { email: data.email });
+
+      if (response.status === 422) {
+        const result = (await response.json()) as { errors?: Record<string, string[]> };
+        setFieldError(result.errors?.email?.join(" ") ?? "The email address is invalid.");
+        return;
+      }
+
+      if (!response.ok) {
+        setServerError("Unable to send reset email right now. Please try again.");
+        return;
+      }
+
+      navigate("/password-sent");
+    } catch (error) {
+      setServerError("Unable to send reset email right now. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -36,6 +73,18 @@ export default function Page() {
               </Box>
 
               <Box className="flex flex-col gap-5">
+                {serverError && (
+                  <Alert severity="error">
+                    <AlertTitle>Reset failed</AlertTitle>
+                    {serverError}
+                  </Alert>
+                )}
+                {fieldError && (
+                  <Alert severity="error">
+                    <AlertTitle>Check your email</AlertTitle>
+                    {fieldError}
+                  </Alert>
+                )}
                 <Box component={"form"} onSubmit={handleSubmit} className="flex flex-col">
                   <FormControl className="outlined" variant="standard" size="small">
                     <FormLabel component="label">Email</FormLabel>
@@ -47,8 +96,8 @@ export default function Page() {
                   </FormControl>
 
                   <Box className="flex flex-col gap-2">
-                    <Button type="submit" variant="contained" className="mb-4">
-                      Continue
+                    <Button type="submit" variant="contained" className="mb-4" disabled={isSubmitting}>
+                      {isSubmitting ? "Sending..." : "Continue"}
                     </Button>
                   </Box>
 
