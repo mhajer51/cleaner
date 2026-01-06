@@ -25,8 +25,8 @@ export default function Page() {
           <Button component={Link} to="/admin/dashboard" variant="contained">
             Dashboard home
           </Button>
-          <Button component={Link} to="/dashboards/default" variant="outlined" color="grey">
-            Back to app
+          <Button component={Link} to="/admin/dashboards" variant="outlined" color="grey">
+            Dashboards overview
           </Button>
         </Box>
       </Paper>

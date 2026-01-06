@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { leftMenuBottomItems, leftMenuItems } from "@/menu-items";
-import AppLayout from "@/pages/app/layout";
+import AppLayout from "@/pages/admin/layout";
 import Loading from "@/pages/loading.tsx";
 import NotFound from "@/pages/not-found";
 import { MenuItem } from "@/types/types";
@@ -25,7 +25,7 @@ const lazyLoad = (path: string) => {
   } else if (path.startsWith("/admin")) {
     key = `./pages${path}/page.tsx`;
   } else {
-    key = `./pages/app${path}/page.tsx`;
+    key = `./pages${path}/page.tsx`;
   }
 
   const importer = modules[key];
@@ -85,7 +85,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Navigate to="/admin/login" replace />} />
       {/* App routes with AppLayout */}
       <Route element={<AppLayout />}>
-        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+        <Route path="/admin" element={<Navigate to="/admin/dashboards" replace />} />
         <Route path="/admin/dashboard" element={lazyLoad("/admin/dashboard")} />
         {/* Routes generated from menu items */}
         {mainRoutes}

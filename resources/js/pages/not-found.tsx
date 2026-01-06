@@ -34,7 +34,7 @@ export default function Page() {
               <Typography variant="body1" color="text.secondary">
                 Error Code: 404
               </Typography>
-              <Button variant="outlined" startIcon={<NiHome />} to="/dashboards/default" component={Link}>
+              <Button variant="outlined" startIcon={<NiHome />} to="/admin/dashboards" component={Link}>
                 Home
               </Button>
             </Box>
