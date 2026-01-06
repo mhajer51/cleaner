@@ -28,7 +28,7 @@ class SliderController extends Controller
                 ];
             });
 
-        return Inertia::render('Admin/Slider', [
+        return Inertia::render('App', [
             'sliders' => $sliders,
         ]);
     }

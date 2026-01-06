@@ -11,12 +11,26 @@ import { MenuItem } from "@/types/types";
 // Statically import all possible pages for build
 const modules = import.meta.glob("./pages/**/page.tsx");
 
+const authPageMap: Record<string, string> = {
+  "/login": "/auth/sign-in",
+  "/register": "/auth/sign-up",
+  "/forgot-password": "/auth/password-reset",
+  "/reset-password": "/auth/password-new",
+  "/password-sent": "/auth/password-sent",
+  "/verify-email": "/auth/get-verification",
+  "/verify-email/confirm": "/auth/set-verification",
+  "/terms-and-conditions": "/auth/terms-and-conditions",
+  "/privacy-policy": "/auth/privacy-policy",
+};
+
 // Lazy load page components
 const lazyLoad = (path: string) => {
   // Handle different paths based on the route
   let key: string;
   if (path === "/") {
     key = "./pages/page.tsx";
+  } else if (authPageMap[path]) {
+    key = `./pages${authPageMap[path]}/page.tsx`;
   } else if (path.startsWith("/auth")) {
     key = `./pages/auth${path.substring(5)}/page.tsx`; // Remove "/auth"
   } else {
@@ -62,15 +76,15 @@ const generateRoutesFromMenuItems = (menuItems: MenuItem[]): React.ReactElement[
 // Generate auth routes
 const generateAuthRoutes = (): React.ReactElement[] => {
   return [
-    <Route key="sign-in" path="sign-in" element={lazyLoad("/auth/sign-in")} />,
-    <Route key="sign-up" path="sign-up" element={lazyLoad("/auth/sign-up")} />,
-    <Route key="password-reset" path="password-reset" element={lazyLoad("/auth/password-reset")} />,
-    <Route key="password-sent" path="password-sent" element={lazyLoad("/auth/password-sent")} />,
-    <Route key="password-new" path="password-new" element={lazyLoad("/auth/password-new")} />,
-    <Route key="get-verification" path="get-verification" element={lazyLoad("/auth/get-verification")} />,
-    <Route key="set-verification" path="set-verification" element={lazyLoad("/auth/set-verification")} />,
-    <Route key="terms-and-conditions" path="terms-and-conditions" element={lazyLoad("/auth/terms-and-conditions")} />,
-    <Route key="privacy-policy" path="privacy-policy" element={lazyLoad("/auth/privacy-policy")} />,
+    <Route key="login" path="/login" element={lazyLoad("/login")} />,
+    <Route key="register" path="/register" element={lazyLoad("/register")} />,
+    <Route key="forgot-password" path="/forgot-password" element={lazyLoad("/forgot-password")} />,
+    <Route key="reset-password" path="/reset-password" element={lazyLoad("/reset-password")} />,
+    <Route key="password-sent" path="/password-sent" element={lazyLoad("/password-sent")} />,
+    <Route key="verify-email" path="/verify-email" element={lazyLoad("/verify-email")} />,
+    <Route key="verify-email-confirm" path="/verify-email/confirm" element={lazyLoad("/verify-email/confirm")} />,
+    <Route key="terms-and-conditions" path="/terms-and-conditions" element={lazyLoad("/terms-and-conditions")} />,
+    <Route key="privacy-policy" path="/privacy-policy" element={lazyLoad("/privacy-policy")} />,
   ];
 };
 
@@ -92,8 +106,7 @@ const AppRoutes = () => {
         {bottomRoutes}
       </Route>
       {/* Auth routes with AuthLayout */}
-      <Route path="/auth" element={<AuthLayout />}>
-        <Route index element={<Navigate to="/auth/sign-in" replace />} />
+      <Route element={<AuthLayout />}>
         {authRoutes}
       </Route>
 

@@ -12,7 +12,7 @@ export default function LPFooter() {
           variant="text"
           size="large"
           color="text-primary"
-          to="/auth/sign-in"
+          to="/login"
           target="_blank"
           component={Link}
         >

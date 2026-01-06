@@ -1229,7 +1229,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "signin",
             label: "menu-signin",
-            href: "/auth/sign-in",
+            href: "/login",
             description: "menu-signin-description",
             isExternalLink: true,
             listIcon: "NiArrowInDown",
@@ -1237,7 +1237,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "signup",
             label: "menu-signup",
-            href: "/auth/sign-up",
+            href: "/register",
             description: "menu-signup-description",
             isExternalLink: true,
             listIcon: "NiArrowInUp",
@@ -1245,7 +1245,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "password-reset",
             label: "menu-password-reset",
-            href: "/auth/password-reset",
+            href: "/forgot-password",
             description: "menu-password-reset-description",
             isExternalLink: true,
             listIcon: "NiLock",
@@ -1253,7 +1253,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "password-sent",
             label: "menu-password-sent",
-            href: "/auth/password-sent",
+            href: "/password-sent",
             description: "menu-password-sent-description",
             isExternalLink: true,
             listIcon: "NiSendUpRight",
@@ -1261,7 +1261,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "password-new",
             label: "menu-password-new",
-            href: "/auth/password-new",
+            href: "/reset-password",
             description: "menu-password-new-description",
             isExternalLink: true,
             listIcon: "NiArrowCircleLeft",
@@ -1269,7 +1269,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "get-verification",
             label: "menu-get-verification",
-            href: "/auth/get-verification",
+            href: "/verify-email",
             description: "menu-get-verification-description",
             isExternalLink: true,
             listIcon: "NiShield",
@@ -1277,7 +1277,7 @@ export const leftMenuItems: MenuItem[] = [
           {
             id: "set-verification",
             label: "menu-set-verification",
-            href: "/auth/set-verification",
+            href: "/verify-email/confirm",
             description: "menu-set-verification-description",
             isExternalLink: true,
             listIcon: "NiShieldCheck",
