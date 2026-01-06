@@ -1,5 +1,5 @@
-import App from "@/App";
+import AppLayout from "@/AppLayout";
 
 export default function AppPage() {
-  return <App />;
+  return <AppLayout />;
 }
