@@ -12,8 +12,8 @@ import AppLayout from "@/AppLayout";
 
 LicenseInfo.setLicenseKey(import.meta.env.VITE_MUIX_LICENSE_KEY || "");
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+createRoot(document.getElementById("app")!).render(
+    <StrictMode>
     <AppLayout />
   </StrictMode>,
 );

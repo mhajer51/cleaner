@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        @vite('resources/js/AppLayout.tsx')
+        @vite('resources/js/main.tsx')
         @inertiaHead
     </head>
     <body class="font-sans antialiased">

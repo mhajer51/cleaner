@@ -80,7 +80,7 @@ const resolveManualChunk = (id) => {
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.tsx',
+            input: 'resources/js/main.tsx',
             refresh: true,
         }),
         react(),
@@ -107,6 +107,11 @@ export default defineConfig({
                     return resolveManualChunk(id) ?? undefined;
                 },
             },
+        },
+    },
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "resources/js"),
         },
     },
 });
