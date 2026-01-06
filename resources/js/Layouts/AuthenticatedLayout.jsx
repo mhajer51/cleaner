@@ -14,9 +14,9 @@ export default function AuthenticatedLayout({ header, children }) {
     return (
         <div className="min-h-screen bg-slate-100 text-slate-900" dir="ltr">
             <div className="lg:flex">
-                <aside className="hidden lg:flex lg:w-72 lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white lg:shadow-sm">
-                    <div className="flex flex-1 flex-col px-6 pb-6 pt-6">
-                        <Link href="/" className="flex items-center gap-3">
+                <aside className="hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-72 lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white lg:shadow-sm">
+                    <div className="flex h-full flex-col px-6 pb-6 pt-6">
+                        <Link href="/" className="flex items-center gap-3 rounded-2xl border border-transparent px-2 py-2 transition hover:border-slate-200 hover:bg-slate-50">
                             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 shadow-sm">
                                 <ApplicationLogo className="h-6 w-6 fill-current text-white" />
                             </div>
@@ -30,12 +30,12 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </Link>
 
-                        <div className="mt-8 space-y-5">
+                        <div className="mt-8 flex flex-1 flex-col space-y-5 overflow-hidden">
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                                     Main
                                 </p>
-                                <div className="mt-3 space-y-1">
+                                <div className="mt-3 flex max-h-full flex-1 flex-col space-y-1 overflow-y-auto pr-2">
                                     <NavLink
                                         href={route('dashboard')}
                                         active={route().current('dashboard')}
@@ -52,7 +52,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Trigger>
                                             <button
                                                 type="button"
-                                                className="group flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none"
+                                                className="group flex w-full items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-900 focus:outline-none"
                                             >
                                                 <span>Settings</span>
                                                 <svg
@@ -73,99 +73,101 @@ export default function AuthenticatedLayout({ header, children }) {
                                         </Dropdown.Trigger>
                                         <Dropdown.Content
                                             align="left"
-                                            width="56"
-                                            contentClasses="py-3 bg-white border border-slate-200"
+                                            width="full"
+                                            contentClasses="py-3 bg-white border border-slate-200 shadow-xl"
                                         >
                                             <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                                                 Account & Admin
                                             </div>
-                                            <Dropdown.Link
-                                                href={route('profile.edit')}
-                                                className="flex items-center gap-3"
-                                            >
-                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-                                                    <svg
-                                                        className="h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="1.5"
-                                                            d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                <span>
-                                                    <span className="block text-sm font-semibold text-slate-800">
-                                                        Update Profile
+                                            <div className="space-y-1 px-2">
+                                                <Dropdown.Link
+                                                    href={route('profile.edit')}
+                                                    className="flex items-center gap-3 rounded-lg border border-transparent bg-white px-3 py-3 hover:border-slate-200"
+                                                >
+                                                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                                        <svg
+                                                            className="h-4 w-4"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="1.5"
+                                                                d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                            />
+                                                        </svg>
                                                     </span>
-                                                    <span className="block text-xs text-slate-500">
-                                                        Edit your personal details
+                                                    <span>
+                                                        <span className="block text-sm font-semibold text-slate-800">
+                                                            Update Profile
+                                                        </span>
+                                                        <span className="block text-xs text-slate-500">
+                                                            Edit your personal details
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </Dropdown.Link>
-                                            <Dropdown.Link
-                                                href="#"
-                                                className="flex items-center gap-3"
-                                            >
-                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-                                                    <svg
-                                                        className="h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="1.5"
-                                                            d="M17 20.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.5 18v-.5m0-4V13m-2.22 1.28-.35-.35m2.57 4.64.35.35M13 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a6 6 0 0 1 10.64-3.88"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                <span>
-                                                    <span className="block text-sm font-semibold text-slate-800">
-                                                        Users
+                                                </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href="#"
+                                                    className="flex items-center gap-3 rounded-lg border border-transparent bg-white px-3 py-3 hover:border-slate-200"
+                                                >
+                                                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                                                        <svg
+                                                            className="h-4 w-4"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="1.5"
+                                                                d="M17 20.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.5 18v-.5m0-4V13m-2.22 1.28-.35-.35m2.57 4.64.35.35M13 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a6 6 0 0 1 10.64-3.88"
+                                                            />
+                                                        </svg>
                                                     </span>
-                                                    <span className="block text-xs text-slate-500">
-                                                        Manage team permissions
+                                                    <span>
+                                                        <span className="block text-sm font-semibold text-slate-800">
+                                                            Users
+                                                        </span>
+                                                        <span className="block text-xs text-slate-500">
+                                                            Manage team permissions
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </Dropdown.Link>
-                                            <Dropdown.Link
-                                                href="#"
-                                                className="flex items-center gap-3"
-                                            >
-                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
-                                                    <svg
-                                                        className="h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth="1.5"
-                                                            d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36-6.36-2.12 2.12M8.76 15.24l-2.12 2.12m0-12.72 2.12 2.12m9.48 9.48 2.12 2.12M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                                                        />
-                                                    </svg>
-                                                </span>
-                                                <span>
-                                                    <span className="block text-sm font-semibold text-slate-800">
-                                                        Language
+                                                </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href="#"
+                                                    className="flex items-center gap-3 rounded-lg border border-transparent bg-white px-3 py-3 hover:border-slate-200"
+                                                >
+                                                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
+                                                        <svg
+                                                            className="h-4 w-4"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth="1.5"
+                                                                d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36-6.36-2.12 2.12M8.76 15.24l-2.12 2.12m0-12.72 2.12 2.12m9.48 9.48 2.12 2.12M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                                            />
+                                                        </svg>
                                                     </span>
-                                                    <span className="block text-xs text-slate-500">
-                                                        Choose app locale
+                                                    <span>
+                                                        <span className="block text-sm font-semibold text-slate-800">
+                                                            Language
+                                                        </span>
+                                                        <span className="block text-xs text-slate-500">
+                                                            Choose app locale
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </Dropdown.Link>
+                                                </Dropdown.Link>
+                                            </div>
                                         </Dropdown.Content>
                                     </Dropdown>
                                 </div>
@@ -192,7 +194,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <button className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-500 transition hover:text-slate-700">
+                                        <button className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-500 transition hover:border-slate-300 hover:bg-white hover:text-slate-700">
                                             <svg
                                                 className="h-4 w-4"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -210,16 +212,63 @@ export default function AuthenticatedLayout({ header, children }) {
                                         </button>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>
-                                            Profile
+                                    <Dropdown.Content
+                                        align="left"
+                                        width="56"
+                                        contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
+                                    >
+                                        <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                            Account
+                                        </div>
+                                        <Dropdown.Link
+                                            href={route('profile.edit')}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                                <svg
+                                                    className="h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="1.5"
+                                                        d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                    />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm font-semibold text-slate-700">
+                                                Profile
+                                            </span>
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
+                                            className="flex items-center gap-3 text-rose-600 hover:text-rose-700"
                                         >
-                                            Sign out
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                                                <svg
+                                                    className="h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="1.5"
+                                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6A2.25 2.25 0 0 0 5.25 5.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                                                    />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm font-semibold">
+                                                Sign out
+                                            </span>
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -289,28 +338,76 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <div className="flex items-center gap-3">
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 transition hover:text-slate-800">
+                                            <span className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 shadow-sm transition hover:border-slate-300 hover:text-slate-800">
                                                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold uppercase text-white">
                                                     {user.name
                                                         .split(' ')
                                                         .map((part) => part[0])
                                                         .join('')}
                                                 </span>
+                                                <span className="hidden text-left text-xs font-semibold text-slate-700 lg:block">
+                                                    {user.name}
+                                                </span>
                                             </span>
                                         </Dropdown.Trigger>
 
-                                        <Dropdown.Content>
+                                        <Dropdown.Content
+                                            align="right"
+                                            width="56"
+                                            contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
+                                        >
+                                            <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                                Account
+                                            </div>
                                             <Dropdown.Link
                                                 href={route('profile.edit')}
+                                                className="flex items-center gap-3"
                                             >
-                                                Profile
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="text-sm font-semibold text-slate-700">
+                                                    Profile
+                                                </span>
                                             </Dropdown.Link>
                                             <Dropdown.Link
                                                 href={route('logout')}
                                                 method="post"
                                                 as="button"
+                                                className="flex items-center gap-3 text-rose-600 hover:text-rose-700"
                                             >
-                                                Sign out
+                                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                                                    <svg
+                                                        className="h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="1.5"
+                                                            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6A2.25 2.25 0 0 0 5.25 5.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="text-sm font-semibold">
+                                                    Sign out
+                                                </span>
                                             </Dropdown.Link>
                                         </Dropdown.Content>
                                     </Dropdown>
@@ -320,7 +417,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             <div className="flex items-center gap-3 lg:hidden">
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 transition hover:text-slate-800">
+                                        <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-1 text-sm text-slate-600 shadow-sm transition hover:border-slate-300 hover:text-slate-800">
                                             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold uppercase text-white">
                                                 {user.name
                                                     .split(' ')
@@ -330,18 +427,63 @@ export default function AuthenticatedLayout({ header, children }) {
                                         </span>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content>
+                                    <Dropdown.Content
+                                        align="right"
+                                        width="56"
+                                        contentClasses="py-2 bg-white border border-slate-200 shadow-xl"
+                                    >
+                                        <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                                            Account
+                                        </div>
                                         <Dropdown.Link
                                             href={route('profile.edit')}
+                                            className="flex items-center gap-3"
                                         >
-                                            Profile
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                                <svg
+                                                    className="h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="1.5"
+                                                        d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 20a8 8 0 0 1 16 0"
+                                                    />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm font-semibold text-slate-700">
+                                                Profile
+                                            </span>
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
+                                            className="flex items-center gap-3 text-rose-600 hover:text-rose-700"
                                         >
-                                            Sign out
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                                                <svg
+                                                    className="h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="1.5"
+                                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6A2.25 2.25 0 0 0 5.25 5.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                                                    />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm font-semibold">
+                                                Sign out
+                                            </span>
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
