@@ -1,4 +1,3 @@
-import { useLayoutContext } from "../layout-context";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,19 +8,13 @@ import { ModeVariant, THEME_OPTIONS } from "@/constants";
 import { RadiobuttonSmallChecked, RadiobuttonSmallEmptyOutlined } from "@/icons/form/mui-radiobutton";
 import NiArrowCircleLeft from "@/icons/nexture/ni-arrow-circle-left";
 import NiBasket from "@/icons/nexture/ni-basket";
-import NiChevronLeftRightReverseSmall from "@/icons/nexture/ni-chevron-left-right-reverse-small";
-import NiChevronLeftRightSmall from "@/icons/nexture/ni-chevron-left-right-small";
 import NiKnobs from "@/icons/nexture/ni-knobs";
-import NiMenu from "@/icons/nexture/ni-menu";
-import NiMenuSplit from "@/icons/nexture/ni-menu-split";
-import NiMenuSplitDot from "@/icons/nexture/ni-menu-split-dot";
 import NiMoon from "@/icons/nexture/ni-moon";
 import NiPalette from "@/icons/nexture/ni-palette";
 import NiScreen from "@/icons/nexture/ni-screen";
 import NiSun from "@/icons/nexture/ni-sun";
 import { cn } from "@/lib/utils";
 import { useThemeContext } from "@/theme/theme-provider";
-import { ContentType, MenuType } from "@/types/types";
 
 export default function ThemeConfiguration() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -32,31 +25,17 @@ export default function ThemeConfiguration() {
 
   const { t } = useTranslation();
 
-  const { theme, setTheme, mode, setMode, content, setContent } = useThemeContext();
-  const { leftMenuType, setLeftMenuType } = useLayoutContext();
+  const { theme, setTheme, mode, setMode } = useThemeContext();
 
   const handleResetTheme = () => {
     setTheme(DEFAULTS.themeColor);
     setMode(DEFAULTS.themeMode);
-    setContent(DEFAULTS.contentType);
-    setLeftMenuType(DEFAULTS.leftMenuType);
   };
 
   const themeModeOptions = [
     { value: "system" as ModeVariant, icon: <NiScreen /> },
     { value: "light" as ModeVariant, icon: <NiSun /> },
     { value: "dark" as ModeVariant, icon: <NiMoon /> },
-  ];
-
-  const leftMenuOptions = [
-    { value: MenuType.Minimal, icon: <NiMenuSplitDot /> },
-    { value: MenuType.Comfort, icon: <NiMenuSplit /> },
-    { value: MenuType.SingleLayer, icon: <NiMenu /> },
-  ];
-
-  const contentOptions = [
-    { value: ContentType.Boxed, icon: <NiChevronLeftRightReverseSmall /> },
-    { value: ContentType.Fluid, icon: <NiChevronLeftRightSmall /> },
   ];
 
   return (
@@ -143,56 +122,6 @@ export default function ThemeConfiguration() {
             </Box>
 
             <Divider />
-            <Typography variant="body2" component="div" className="font-semibold">
-              {t("left-menu")}
-            </Typography>
-            <Box className="flex flex-col gap-2">
-              {leftMenuOptions.map((option) => (
-                <Button
-                  key={`theme-left-menu-${option.value}`}
-                  className={cn(
-                    "full-width-button hover:bg-grey-25! flex justify-between shadow-none! outline-none!",
-                    leftMenuType === option.value && "active bg-grey-25!",
-                  )}
-                  variant="surface"
-                  color={leftMenuType === option.value ? "primary" : "text-primary"}
-                  startIcon={option.icon}
-                  onClick={() => setLeftMenuType(option.value)}
-                >
-                  {t(`menu-${option.value}`)}
-                  <span className={cn("flex flex-1 justify-end", leftMenuType !== option.value && "text-grey-200")}>
-                    {leftMenuType === option.value && <RadiobuttonSmallChecked />}
-                    {leftMenuType !== option.value && <RadiobuttonSmallEmptyOutlined />}
-                  </span>
-                </Button>
-              ))}
-            </Box>
-
-            <Divider />
-            <Typography variant="body2" component="div" className="font-semibold">
-              {t("content")}
-            </Typography>
-            <Box className="flex flex-col gap-2">
-              {contentOptions.map((option) => (
-                <Button
-                  key={`theme-content-${option.value}`}
-                  className={cn(
-                    "full-width-button hover:bg-grey-25! flex justify-between shadow-none! outline-none!",
-                    content === option.value && "active bg-grey-25!",
-                  )}
-                  variant="surface"
-                  color={content === option.value ? "primary" : "text-primary"}
-                  startIcon={option.icon}
-                  onClick={() => setContent(option.value)}
-                >
-                  {t(`content-${option.value}`)}
-                  <span className={cn("flex flex-1 justify-end", content !== option.value && "text-grey-200")}>
-                    {content === option.value && <RadiobuttonSmallChecked />}
-                    {content !== option.value && <RadiobuttonSmallEmptyOutlined />}
-                  </span>
-                </Button>
-              ))}
-            </Box>
           </Box>
           <Box className="mt-auto flex w-full px-5 pb-4">
             <Button
