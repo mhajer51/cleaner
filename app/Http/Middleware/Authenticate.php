@@ -16,10 +16,10 @@ class Authenticate extends Middleware
             return null;
         }
 
-        if (in_array('admin', $this->guards, true)) {
+        if (auth('admin')->user()) {
             return route('admin.login');
         }
 
-        return route('login');
+        return url('/');
     }
 }
