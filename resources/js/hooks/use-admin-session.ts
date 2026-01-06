@@ -3,11 +3,16 @@ import { useEffect, useState } from "react";
 type AdminSessionState = {
   authenticated: boolean;
   loading: boolean;
+  user: {
+    name: string;
+    email: string;
+  } | null;
 };
 
 const defaultState: AdminSessionState = {
   authenticated: false,
   loading: true,
+  user: null,
 };
 
 const fetchAdminSession = async () => {
@@ -20,11 +25,17 @@ const fetchAdminSession = async () => {
   });
 
   if (!response.ok) {
-    return { authenticated: false };
+    return { authenticated: false, user: null };
   }
 
-  const data = (await response.json().catch(() => ({}))) as { authenticated?: boolean };
-  return { authenticated: Boolean(data.authenticated) };
+  const data = (await response.json().catch(() => ({}))) as {
+    authenticated?: boolean;
+    user?: { name?: string; email?: string } | null;
+  };
+  return {
+    authenticated: Boolean(data.authenticated),
+    user: data.user?.name && data.user?.email ? { name: data.user.name, email: data.user.email } : null,
+  };
 };
 
 export const useAdminSession = () => {
@@ -36,12 +47,12 @@ export const useAdminSession = () => {
     fetchAdminSession()
       .then((data) => {
         if (isMounted) {
-          setState({ authenticated: data.authenticated, loading: false });
+          setState({ authenticated: data.authenticated, loading: false, user: data.user });
         }
       })
       .catch(() => {
         if (isMounted) {
-          setState({ authenticated: false, loading: false });
+          setState({ authenticated: false, loading: false, user: null });
         }
       });
 

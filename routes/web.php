@@ -21,8 +21,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::get('/session', function () {
+        $admin = Auth::guard('admin')->user();
+
         return response()->json([
             'authenticated' => Auth::guard('admin')->check(),
+            'user' => $admin
+                ? [
+                    'name' => $admin->name,
+                    'email' => $admin->email,
+                ]
+                : null,
         ]);
     })->name('session');
 
