@@ -2,15 +2,22 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('app');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboards/default', function () {
-        return view('app');
+    Route::get('/admin/dashboard', function () {
+        return Inertia::render('Dashboard');
     })->name('dashboard');
 
     Route::get('/admin/slider', [SliderController::class, 'index'])
@@ -26,7 +33,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');

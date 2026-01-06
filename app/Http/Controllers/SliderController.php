@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Slider;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class SliderController extends Controller
 {
-    public function index(Request $request): View|JsonResponse
+    public function index(): Response
     {
         $sliders = Slider::with('translation')
             ->orderBy('order')
@@ -28,13 +28,9 @@ class SliderController extends Controller
                 ];
             });
 
-        if ($request->expectsJson()) {
-            return response()->json([
-                'sliders' => $sliders,
-            ]);
-        }
-
-        return view('app');
+        return Inertia::render('Admin/Slider', [
+            'sliders' => $sliders,
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
