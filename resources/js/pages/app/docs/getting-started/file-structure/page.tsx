@@ -101,7 +101,7 @@ export default function DocsGettingStartedFileStructure() {
     +-- style                             // All the CSS files
     +-- theme                             // Theme provider and MUI theme overrides
     +-- types                             // Custom types to extend MUI
-    |-- App.tsx                           // The main layout of the application
+    |-- AppLayout.tsx                     // The main layout of the application
     |-- config.ts                         // The main theme configuration
     |-- constants.ts                      // Variable definitions that are used in the theme
     |-- main.tsx                          // The initial file of the application
