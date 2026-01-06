@@ -5,8 +5,8 @@ import { Screens } from "@/types/types";
 
 const config: Config = {
   important: "html",
-  content: ["./src/**/*.{ts,tsx}"],
-  theme: {
+    content: ["./**/*.{ts,tsx}"],
+    theme: {
     extend: {
       fontFamily: {
         sans: ["var(--font-body)", "ui-sans-serif"],
